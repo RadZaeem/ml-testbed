@@ -1,0 +1,867 @@
+[32m[1218 01:08:58 @logger.py:74][0m Argv: PTB-LSTM.py
+[32m[1218 01:08:58 @fs.py:89][0m [5m[31mWRN[0m Env var $TENSORPACK_DATASET not set, using /home/9/17R70036/tensorpack_data for datasets.
+[32m[1218 01:08:58 @inference_runner.py:79][0m InferenceRunner will eval 105 iterations
+[32m[1218 01:08:58 @inference_runner.py:79][0m InferenceRunner will eval 117 iterations
+[32m[1218 01:09:00 @registry.py:121][0m fc input: [700, 650]
+[32m[1218 01:09:00 @PTB-LSTM.py:86][0m Binarizing weight fc/W
+[32m[1218 01:09:00 @registry.py:129][0m fc output: [700, 10000]
+[32m[1218 01:09:17 @model_utils.py:49][0m [36mModel Parameters: 
+[0mname                                                     shape             dim
+-------------------------------------------------------  ------------  -------
+embedding:0                                              [10000, 650]  6500000
+LSTM/rnn/multi_rnn_cell/cell_0/basic_lstm_cell/kernel:0  [1300, 2600]  3380000
+LSTM/rnn/multi_rnn_cell/cell_0/basic_lstm_cell/bias:0    [2600]           2600
+LSTM/rnn/multi_rnn_cell/cell_1/basic_lstm_cell/kernel:0  [1300, 2600]  3380000
+LSTM/rnn/multi_rnn_cell/cell_1/basic_lstm_cell/bias:0    [2600]           2600
+fc/W:0                                                   [650, 10000]  6500000
+fc/b:0                                                   [10000]         10000[36m
+Total #vars=7, #params=19775200, size=75.44MB[0m
+[32m[1218 01:09:17 @base.py:194][0m Setup callbacks graph ...
+[32m[1218 01:09:17 @predict.py:42][0m Building predictor tower 'InferenceTower' on device /gpu:0 ...
+[32m[1218 01:09:19 @PTB-LSTM.py:86][0m Binarizing weight fc/W
+[32m[1218 01:09:19 @collection.py:139][0m Size of these collections were changed in InferenceTower: (tf.GraphKeys.QUEUE_RUNNERS: 1->2)
+[32m[1218 01:09:19 @collection.py:152][0m These collections were modified but restored in InferenceTower: (tf.GraphKeys.SUMMARIES: 3->4)
+[32m[1218 01:09:19 @predict.py:42][0m Building predictor tower 'InferenceTowerTest' on device /gpu:0 ...
+[32m[1218 01:09:21 @PTB-LSTM.py:86][0m Binarizing weight fc/W
+[32m[1218 01:09:21 @collection.py:139][0m Size of these collections were changed in InferenceTowerTest: (tf.GraphKeys.QUEUE_RUNNERS: 2->3)
+[32m[1218 01:09:21 @collection.py:152][0m These collections were modified but restored in InferenceTowerTest: (tf.GraphKeys.SUMMARIES: 3->4)
+[32m[1218 01:09:21 @summary.py:34][0m Maintain moving average summary of 2 tensors.
+[32m[1218 01:09:28 @base.py:210][0m Creating the session ...
+[32m[1218 01:09:34 @base.py:218][0m Initializing the session ...
+[32m[1218 01:09:34 @base.py:225][0m Graph Finalized.
+[32m[1218 01:09:38 @param.py:144][0m After epoch 0, learning_rate will change to 1.00000000
+[32m[1218 01:09:40 @base.py:245][0m Start Epoch 1 ...
+[32m[1218 01:12:27 @base.py:255][0m Epoch 1 (global_step 1327) finished, time:167.26 sec.
+[32m[1218 01:12:28 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-1327.
+[32m[1218 01:12:32 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:12:32 @monitor.py:363][0m cost: 234.32
+[32m[1218 01:12:32 @monitor.py:363][0m perplexity: 812.08
+[32m[1218 01:12:32 @monitor.py:363][0m test_cost: 230.83
+[32m[1218 01:12:32 @monitor.py:363][0m test_perplexity: 731.56
+[32m[1218 01:12:32 @monitor.py:363][0m validation_cost: 233.34
+[32m[1218 01:12:32 @monitor.py:363][0m validation_perplexity: 785.99
+[32m[1218 01:12:32 @group.py:42][0m Callbacks took 4.643 sec in total. InferenceRunner: 2.101sec; InferenceRunner: 2.181sec
+[32m[1218 01:12:32 @base.py:245][0m Start Epoch 2 ...
+[32m[1218 01:15:13 @base.py:255][0m Epoch 2 (global_step 2654) finished, time:161.34 sec.
+[32m[1218 01:15:14 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-2654.
+[32m[1218 01:15:17 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:15:17 @monitor.py:363][0m cost: 234.56
+[32m[1218 01:15:17 @monitor.py:363][0m perplexity: 817.98
+[32m[1218 01:15:17 @monitor.py:363][0m test_cost: 231.58
+[32m[1218 01:15:17 @monitor.py:363][0m test_perplexity: 747.3
+[32m[1218 01:15:17 @monitor.py:363][0m validation_cost: 233.96
+[32m[1218 01:15:17 @monitor.py:363][0m validation_perplexity: 800.04
+[32m[1218 01:15:17 @group.py:42][0m Callbacks took 3.794 sec in total. InferenceRunner: 1.696sec; InferenceRunner: 1.902sec
+[32m[1218 01:15:17 @base.py:245][0m Start Epoch 3 ...
+[32m[1218 01:17:58 @base.py:255][0m Epoch 3 (global_step 3981) finished, time:160.91 sec.
+[32m[1218 01:17:59 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-3981.
+[32m[1218 01:18:02 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:18:02 @monitor.py:363][0m cost: 233.77
+[32m[1218 01:18:02 @monitor.py:363][0m perplexity: 799.08
+[32m[1218 01:18:02 @monitor.py:363][0m test_cost: 230.91
+[32m[1218 01:18:02 @monitor.py:363][0m test_perplexity: 733.13
+[32m[1218 01:18:02 @monitor.py:363][0m validation_cost: 233.34
+[32m[1218 01:18:02 @monitor.py:363][0m validation_perplexity: 785.98
+[32m[1218 01:18:02 @group.py:42][0m Callbacks took 3.922 sec in total. InferenceRunner: 1.720sec; InferenceRunner: 2.046sec
+[32m[1218 01:18:02 @base.py:245][0m Start Epoch 4 ...
+[32m[1218 01:20:43 @base.py:255][0m Epoch 4 (global_step 5308) finished, time:161.02 sec.
+[32m[1218 01:20:44 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-5308.
+[32m[1218 01:20:47 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:20:47 @monitor.py:363][0m cost: 233.61
+[32m[1218 01:20:47 @monitor.py:363][0m perplexity: 795.87
+[32m[1218 01:20:47 @monitor.py:363][0m test_cost: 230.64
+[32m[1218 01:20:47 @monitor.py:363][0m test_perplexity: 727.49
+[32m[1218 01:20:47 @monitor.py:363][0m validation_cost: 233.12
+[32m[1218 01:20:47 @monitor.py:363][0m validation_perplexity: 780.92
+[32m[1218 01:20:47 @group.py:42][0m Callbacks took 3.848 sec in total. InferenceRunner: 1.709sec; InferenceRunner: 1.891sec
+[32m[1218 01:20:47 @base.py:245][0m Start Epoch 5 ...
+[32m[1218 01:23:29 @base.py:255][0m Epoch 5 (global_step 6635) finished, time:161.21 sec.
+[32m[1218 01:23:29 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-6635.
+[32m[1218 01:23:33 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:23:33 @monitor.py:363][0m cost: 233.12
+[32m[1218 01:23:33 @monitor.py:363][0m perplexity: 784.63
+[32m[1218 01:23:33 @monitor.py:363][0m test_cost: 230
+[32m[1218 01:23:33 @monitor.py:363][0m test_perplexity: 714.48
+[32m[1218 01:23:33 @monitor.py:363][0m validation_cost: 232.35
+[32m[1218 01:23:33 @monitor.py:363][0m validation_perplexity: 763.97
+[32m[1218 01:23:33 @group.py:42][0m Callbacks took 4.038 sec in total. InferenceRunner: 1.820sec; InferenceRunner: 2.112sec
+[32m[1218 01:23:33 @base.py:245][0m Start Epoch 6 ...
+[32m[1218 01:26:14 @base.py:255][0m Epoch 6 (global_step 7962) finished, time:161.02 sec.
+[32m[1218 01:26:14 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-7962.
+[32m[1218 01:26:18 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:26:18 @monitor.py:363][0m cost: 232.93
+[32m[1218 01:26:18 @monitor.py:363][0m perplexity: 780.96
+[32m[1218 01:26:18 @monitor.py:363][0m test_cost: 230.17
+[32m[1218 01:26:18 @monitor.py:363][0m test_perplexity: 717.88
+[32m[1218 01:26:18 @monitor.py:363][0m validation_cost: 232.26
+[32m[1218 01:26:18 @monitor.py:363][0m validation_perplexity: 762.11
+[32m[1218 01:26:18 @group.py:42][0m Callbacks took 3.898 sec in total. InferenceRunner: 1.696sec; InferenceRunner: 1.860sec
+[32m[1218 01:26:18 @base.py:245][0m Start Epoch 7 ...
+[32m[1218 01:28:59 @base.py:255][0m Epoch 7 (global_step 9289) finished, time:161.18 sec.
+[32m[1218 01:28:59 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-9289.
+[32m[1218 01:28:59 @param.py:144][0m After epoch 7, learning_rate will change to 0.80000000
+[32m[1218 01:29:03 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:29:03 @monitor.py:363][0m cost: 1211.4
+[32m[1218 01:29:03 @monitor.py:363][0m perplexity: 1.2952e+27
+[32m[1218 01:29:03 @monitor.py:363][0m test_cost: 2365.1
+[32m[1218 01:29:03 @monitor.py:363][0m test_perplexity: 2.2217e+29
+[32m[1218 01:29:03 @monitor.py:363][0m validation_cost: 2359
+[32m[1218 01:29:03 @monitor.py:363][0m validation_perplexity: 1.8681e+29
+[32m[1218 01:29:03 @group.py:42][0m Callbacks took 3.760 sec in total. InferenceRunner: 1.715sec; InferenceRunner: 1.897sec
+[32m[1218 01:29:03 @base.py:245][0m Start Epoch 8 ...
+[32m[1218 01:31:51 @base.py:255][0m Epoch 8 (global_step 10616) finished, time:168.82 sec.
+[32m[1218 01:31:52 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-10616.
+[32m[1218 01:31:52 @param.py:144][0m After epoch 8, learning_rate will change to 0.64000001
+[32m[1218 01:31:55 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:31:55 @monitor.py:363][0m cost: 8871.8
+[32m[1218 01:31:55 @monitor.py:363][0m perplexity: nan
+[32m[1218 01:31:55 @monitor.py:363][0m test_cost: 10336
+[32m[1218 01:31:55 @monitor.py:363][0m test_perplexity: 1.7777e+128
+[32m[1218 01:31:55 @monitor.py:363][0m validation_cost: 10166
+[32m[1218 01:31:55 @monitor.py:363][0m validation_perplexity: 1.3984e+126
+[32m[1218 01:31:55 @group.py:42][0m Callbacks took 4.035 sec in total. InferenceRunner: 1.738sec; InferenceRunner: 2.109sec
+[32m[1218 01:31:55 @base.py:245][0m Start Epoch 9 ...
+[32m[1218 01:34:48 @base.py:255][0m Epoch 9 (global_step 11943) finished, time:172.49 sec.
+[32m[1218 01:34:48 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-11943.
+[32m[1218 01:34:48 @param.py:144][0m After epoch 9, learning_rate will change to 0.51199999
+[32m[1218 01:34:52 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:34:52 @monitor.py:363][0m cost: 9809.5
+[32m[1218 01:34:52 @monitor.py:363][0m perplexity: nan
+[32m[1218 01:34:52 @monitor.py:363][0m test_cost: 9953.9
+[32m[1218 01:34:52 @monitor.py:363][0m test_perplexity: 3.2518e+123
+[32m[1218 01:34:52 @monitor.py:363][0m validation_cost: 9875.1
+[32m[1218 01:34:52 @monitor.py:363][0m validation_perplexity: 3.4241e+122
+[32m[1218 01:34:52 @group.py:42][0m Callbacks took 3.907 sec in total. InferenceRunner: 1.700sec; InferenceRunner: 2.019sec
+[32m[1218 01:34:52 @base.py:245][0m Start Epoch 10 ...
+[32m[1218 01:37:34 @base.py:255][0m Epoch 10 (global_step 13270) finished, time:162.07 sec.
+[32m[1218 01:37:34 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-13270.
+[32m[1218 01:37:34 @param.py:144][0m After epoch 10, learning_rate will change to 0.40959997
+[32m[1218 01:37:38 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:37:38 @monitor.py:363][0m cost: 9794.1
+[32m[1218 01:37:38 @monitor.py:363][0m perplexity: nan
+[32m[1218 01:37:38 @monitor.py:363][0m test_cost: 9680.6
+[32m[1218 01:37:38 @monitor.py:363][0m test_perplexity: 1.3212e+120
+[32m[1218 01:37:38 @monitor.py:363][0m validation_cost: 9682.1
+[32m[1218 01:37:38 @monitor.py:363][0m validation_perplexity: 1.3801e+120
+[32m[1218 01:37:38 @group.py:42][0m Callbacks took 3.822 sec in total. InferenceRunner: 1.736sec; InferenceRunner: 1.951sec
+[32m[1218 01:37:38 @base.py:245][0m Start Epoch 11 ...
+[32m[1218 01:40:24 @base.py:255][0m Epoch 11 (global_step 14597) finished, time:166.65 sec.
+[32m[1218 01:40:25 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-14597.
+[32m[1218 01:40:25 @param.py:144][0m After epoch 11, learning_rate will change to 0.32767997
+[32m[1218 01:40:28 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:40:28 @monitor.py:363][0m cost: 9991.3
+[32m[1218 01:40:28 @monitor.py:363][0m perplexity: nan
+[32m[1218 01:40:28 @monitor.py:363][0m test_cost: 9808.5
+[32m[1218 01:40:28 @monitor.py:363][0m test_perplexity: 5.1095e+121
+[32m[1218 01:40:28 @monitor.py:363][0m validation_cost: 9893.4
+[32m[1218 01:40:28 @monitor.py:363][0m validation_perplexity: 5.7766e+122
+[32m[1218 01:40:28 @group.py:42][0m Callbacks took 3.821 sec in total. InferenceRunner: 1.765sec; InferenceRunner: 1.900sec
+[32m[1218 01:40:28 @base.py:245][0m Start Epoch 12 ...
+[32m[1218 01:43:08 @base.py:255][0m Epoch 12 (global_step 15924) finished, time:159.25 sec.
+[32m[1218 01:43:08 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-15924.
+[32m[1218 01:43:08 @param.py:144][0m After epoch 12, learning_rate will change to 0.26214397
+[32m[1218 01:43:11 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:43:11 @monitor.py:363][0m cost: 9527.9
+[32m[1218 01:43:11 @monitor.py:363][0m perplexity: nan
+[32m[1218 01:43:11 @monitor.py:363][0m test_cost: 9694.4
+[32m[1218 01:43:11 @monitor.py:363][0m test_perplexity: 1.9598e+120
+[32m[1218 01:43:11 @monitor.py:363][0m validation_cost: 9575.6
+[32m[1218 01:43:11 @monitor.py:363][0m validation_perplexity: 6.5746e+118
+[32m[1218 01:43:11 @group.py:42][0m Callbacks took 3.849 sec in total. InferenceRunner: 1.693sec; InferenceRunner: 1.947sec
+[32m[1218 01:43:11 @base.py:245][0m Start Epoch 13 ...
+[32m[1218 01:46:05 @base.py:255][0m Epoch 13 (global_step 17251) finished, time:173.40 sec.
+[32m[1218 01:46:05 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-17251.
+[32m[1218 01:46:05 @param.py:144][0m After epoch 13, learning_rate will change to 0.20971518
+[32m[1218 01:46:09 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:46:09 @monitor.py:363][0m cost: 8884.7
+[32m[1218 01:46:09 @monitor.py:363][0m perplexity: nan
+[32m[1218 01:46:09 @monitor.py:363][0m test_cost: 7598
+[32m[1218 01:46:09 @monitor.py:363][0m test_perplexity: 1.8997e+94
+[32m[1218 01:46:09 @monitor.py:363][0m validation_cost: 7574.3
+[32m[1218 01:46:09 @monitor.py:363][0m validation_perplexity: 9.6742e+93
+[32m[1218 01:46:09 @group.py:42][0m Callbacks took 3.746 sec in total. InferenceRunner: 1.725sec; InferenceRunner: 1.889sec
+[32m[1218 01:46:09 @base.py:245][0m Start Epoch 14 ...
+[32m[1218 01:48:51 @base.py:255][0m Epoch 14 (global_step 18578) finished, time:161.60 sec.
+[32m[1218 01:48:51 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-18578.
+[32m[1218 01:48:51 @param.py:144][0m After epoch 14, learning_rate will change to 0.16777214
+[32m[1218 01:48:54 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:48:54 @monitor.py:363][0m cost: 8508.6
+[32m[1218 01:48:54 @monitor.py:363][0m perplexity: nan
+[32m[1218 01:48:54 @monitor.py:363][0m test_cost: 8344.2
+[32m[1218 01:48:54 @monitor.py:363][0m test_perplexity: 3.4496e+103
+[32m[1218 01:48:54 @monitor.py:363][0m validation_cost: 8381.9
+[32m[1218 01:48:54 @monitor.py:363][0m validation_perplexity: 1.0147e+104
+[32m[1218 01:48:54 @group.py:42][0m Callbacks took 3.795 sec in total. InferenceRunner: 1.725sec; InferenceRunner: 1.896sec
+[32m[1218 01:48:54 @base.py:245][0m Start Epoch 15 ...
+[32m[1218 01:51:40 @base.py:255][0m Epoch 15 (global_step 19905) finished, time:165.77 sec.
+[32m[1218 01:51:40 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-19905.
+[32m[1218 01:51:40 @param.py:144][0m After epoch 15, learning_rate will change to 0.13421772
+[32m[1218 01:51:44 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:51:44 @monitor.py:363][0m cost: 8188
+[32m[1218 01:51:44 @monitor.py:363][0m perplexity: nan
+[32m[1218 01:51:44 @monitor.py:363][0m test_cost: 7916
+[32m[1218 01:51:44 @monitor.py:363][0m test_perplexity: 1.6791e+98
+[32m[1218 01:51:44 @monitor.py:363][0m validation_cost: 8025.6
+[32m[1218 01:51:44 @monitor.py:363][0m validation_perplexity: 3.8409e+99
+[32m[1218 01:51:44 @group.py:42][0m Callbacks took 3.754 sec in total. InferenceRunner: 1.693sec; InferenceRunner: 1.942sec
+[32m[1218 01:51:44 @base.py:245][0m Start Epoch 16 ...
+[32m[1218 01:54:27 @base.py:255][0m Epoch 16 (global_step 21232) finished, time:163.05 sec.
+[32m[1218 01:54:27 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-21232.
+[32m[1218 01:54:27 @param.py:144][0m After epoch 16, learning_rate will change to 0.10737417
+[32m[1218 01:54:31 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:54:31 @monitor.py:363][0m cost: 8090.1
+[32m[1218 01:54:31 @monitor.py:363][0m perplexity: nan
+[32m[1218 01:54:31 @monitor.py:363][0m test_cost: 8208.4
+[32m[1218 01:54:31 @monitor.py:363][0m test_perplexity: 7.1321e+101
+[32m[1218 01:54:31 @monitor.py:363][0m validation_cost: 8142.8
+[32m[1218 01:54:31 @monitor.py:363][0m validation_perplexity: 1.0942e+101
+[32m[1218 01:54:31 @group.py:42][0m Callbacks took 3.796 sec in total. InferenceRunner: 1.692sec; InferenceRunner: 1.927sec
+[32m[1218 01:54:31 @base.py:245][0m Start Epoch 17 ...
+[32m[1218 01:57:10 @base.py:255][0m Epoch 17 (global_step 22559) finished, time:159.20 sec.
+[32m[1218 01:57:10 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-22559.
+[32m[1218 01:57:10 @param.py:144][0m After epoch 17, learning_rate will change to 0.08589934
+[32m[1218 01:57:14 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 01:57:14 @monitor.py:363][0m cost: 7223.9
+[32m[1218 01:57:14 @monitor.py:363][0m perplexity: nan
+[32m[1218 01:57:14 @monitor.py:363][0m test_cost: 6835.5
+[32m[1218 01:57:14 @monitor.py:363][0m test_perplexity: 6.5771e+84
+[32m[1218 01:57:14 @monitor.py:363][0m validation_cost: 6819.8
+[32m[1218 01:57:14 @monitor.py:363][0m validation_perplexity: 4.1934e+84
+[32m[1218 01:57:14 @group.py:42][0m Callbacks took 4.090 sec in total. InferenceRunner: 1.743sec; InferenceRunner: 2.179sec
+[32m[1218 01:57:14 @base.py:245][0m Start Epoch 18 ...
+[32m[1218 02:00:04 @base.py:255][0m Epoch 18 (global_step 23886) finished, time:170.20 sec.
+[32m[1218 02:00:05 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-23886.
+[32m[1218 02:00:05 @param.py:144][0m After epoch 18, learning_rate will change to 0.06871947
+[32m[1218 02:00:09 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:00:09 @monitor.py:363][0m cost: 6553.3
+[32m[1218 02:00:09 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:00:09 @monitor.py:363][0m test_cost: 7330
+[32m[1218 02:00:09 @monitor.py:363][0m test_perplexity: 8.9755e+90
+[32m[1218 02:00:09 @monitor.py:363][0m validation_cost: 7312.5
+[32m[1218 02:00:09 @monitor.py:363][0m validation_perplexity: 5.4532e+90
+[32m[1218 02:00:09 @group.py:42][0m Callbacks took 4.320 sec in total. InferenceRunner: 1.811sec; InferenceRunner: 1.880sec
+[32m[1218 02:00:09 @base.py:245][0m Start Epoch 19 ...
+[32m[1218 02:02:48 @base.py:255][0m Epoch 19 (global_step 25213) finished, time:159.21 sec.
+[32m[1218 02:02:48 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-25213.
+[32m[1218 02:02:48 @param.py:144][0m After epoch 19, learning_rate will change to 0.05497558
+[32m[1218 02:02:52 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:02:52 @monitor.py:363][0m cost: 5937.3
+[32m[1218 02:02:52 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:02:52 @monitor.py:363][0m test_cost: 4956.5
+[32m[1218 02:02:52 @monitor.py:363][0m test_perplexity: 3.1811e+61
+[32m[1218 02:02:52 @monitor.py:363][0m validation_cost: 5008.8
+[32m[1218 02:02:52 @monitor.py:363][0m validation_perplexity: 1.4149e+62
+[32m[1218 02:02:52 @group.py:42][0m Callbacks took 3.659 sec in total. InferenceRunner: 1.663sec; InferenceRunner: 1.847sec
+[32m[1218 02:02:52 @base.py:245][0m Start Epoch 20 ...
+[32m[1218 02:05:31 @base.py:255][0m Epoch 20 (global_step 26540) finished, time:159.23 sec.
+[32m[1218 02:05:31 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-26540.
+[32m[1218 02:05:31 @param.py:144][0m After epoch 20, learning_rate will change to 0.04398046
+[32m[1218 02:05:35 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:05:35 @monitor.py:363][0m cost: 5752.6
+[32m[1218 02:05:35 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:05:35 @monitor.py:363][0m test_cost: 5216.1
+[32m[1218 02:05:35 @monitor.py:363][0m test_perplexity: 5.286e+64
+[32m[1218 02:05:35 @monitor.py:363][0m validation_cost: 5208.5
+[32m[1218 02:05:35 @monitor.py:363][0m validation_perplexity: 4.2566e+64
+[32m[1218 02:05:35 @group.py:42][0m Callbacks took 4.123 sec in total. InferenceRunner: 1.838sec; InferenceRunner: 2.140sec
+[32m[1218 02:05:35 @base.py:245][0m Start Epoch 21 ...
+[32m[1218 02:08:21 @base.py:255][0m Epoch 21 (global_step 27867) finished, time:165.71 sec.
+[32m[1218 02:08:21 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-27867.
+[32m[1218 02:08:21 @param.py:144][0m After epoch 21, learning_rate will change to 0.03518437
+[32m[1218 02:08:25 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:08:25 @monitor.py:363][0m cost: 5364.1
+[32m[1218 02:08:25 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:08:25 @monitor.py:363][0m test_cost: 5372.1
+[32m[1218 02:08:25 @monitor.py:363][0m test_perplexity: 4.5645e+66
+[32m[1218 02:08:25 @monitor.py:363][0m validation_cost: 5362.3
+[32m[1218 02:08:25 @monitor.py:363][0m validation_perplexity: 3.4485e+66
+[32m[1218 02:08:25 @group.py:42][0m Callbacks took 3.811 sec in total. InferenceRunner: 1.722sec; InferenceRunner: 1.909sec
+[32m[1218 02:08:25 @base.py:245][0m Start Epoch 22 ...
+[32m[1218 02:11:09 @base.py:255][0m Epoch 22 (global_step 29194) finished, time:163.81 sec.
+[32m[1218 02:11:09 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-29194.
+[32m[1218 02:11:09 @param.py:144][0m After epoch 22, learning_rate will change to 0.02814749
+[32m[1218 02:11:12 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:11:12 @monitor.py:363][0m cost: 5254.7
+[32m[1218 02:11:12 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:11:12 @monitor.py:363][0m test_cost: 5017.9
+[32m[1218 02:11:12 @monitor.py:363][0m test_perplexity: 1.8393e+62
+[32m[1218 02:11:12 @monitor.py:363][0m validation_cost: 4950.7
+[32m[1218 02:11:12 @monitor.py:363][0m validation_perplexity: 2.696e+61
+[32m[1218 02:11:12 @group.py:42][0m Callbacks took 3.826 sec in total. InferenceRunner: 1.692sec; InferenceRunner: 1.991sec
+[32m[1218 02:11:12 @base.py:245][0m Start Epoch 23 ...
+[32m[1218 02:13:57 @base.py:255][0m Epoch 23 (global_step 30521) finished, time:164.94 sec.
+[32m[1218 02:14:00 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-30521.
+[32m[1218 02:14:00 @param.py:144][0m After epoch 23, learning_rate will change to 0.02251800
+[32m[1218 02:14:06 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:14:06 @monitor.py:363][0m cost: 4804.4
+[32m[1218 02:14:06 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:14:06 @monitor.py:363][0m test_cost: 4167.3
+[32m[1218 02:14:06 @monitor.py:363][0m test_perplexity: 5.124e+51
+[32m[1218 02:14:06 @monitor.py:363][0m validation_cost: 4170.3
+[32m[1218 02:14:06 @monitor.py:363][0m validation_perplexity: 5.5817e+51
+[32m[1218 02:14:06 @group.py:42][0m Callbacks took 9.023 sec in total. ModelSaver: 2.805sec
+[32m[1218 02:14:06 @base.py:245][0m Start Epoch 24 ...
+[32m[1218 02:16:51 @base.py:255][0m Epoch 24 (global_step 31848) finished, time:164.36 sec.
+[32m[1218 02:16:55 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-31848.
+[32m[1218 02:16:55 @param.py:144][0m After epoch 24, learning_rate will change to 0.01801440
+[32m[1218 02:16:59 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:16:59 @monitor.py:363][0m cost: 4755.3
+[32m[1218 02:16:59 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:16:59 @monitor.py:363][0m test_cost: 4598.4
+[32m[1218 02:16:59 @monitor.py:363][0m test_perplexity: 1.1458e+57
+[32m[1218 02:16:59 @monitor.py:363][0m validation_cost: 4634
+[32m[1218 02:16:59 @monitor.py:363][0m validation_perplexity: 3.1671e+57
+[32m[1218 02:16:59 @group.py:42][0m Callbacks took 8.170 sec in total. ModelSaver: 3.703sec
+[32m[1218 02:16:59 @base.py:245][0m Start Epoch 25 ...
+[32m[1218 02:19:50 @base.py:255][0m Epoch 25 (global_step 33175) finished, time:171.41 sec.
+[32m[1218 02:19:54 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-33175.
+[32m[1218 02:19:54 @param.py:144][0m After epoch 25, learning_rate will change to 0.01441152
+[32m[1218 02:19:58 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:19:58 @monitor.py:363][0m cost: 4878.8
+[32m[1218 02:19:58 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:19:58 @monitor.py:363][0m test_cost: 4581.4
+[32m[1218 02:19:58 @monitor.py:363][0m test_perplexity: 7.0447e+56
+[32m[1218 02:19:58 @monitor.py:363][0m validation_cost: 4625.6
+[32m[1218 02:19:58 @monitor.py:363][0m validation_perplexity: 2.493e+57
+[32m[1218 02:19:58 @group.py:42][0m Callbacks took 7.481 sec in total. ModelSaver: 3.630sec
+[32m[1218 02:19:58 @base.py:245][0m Start Epoch 26 ...
+[32m[1218 02:22:44 @base.py:255][0m Epoch 26 (global_step 34502) finished, time:166.33 sec.
+[32m[1218 02:22:49 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-34502.
+[32m[1218 02:22:49 @param.py:144][0m After epoch 26, learning_rate will change to 0.01152921
+[32m[1218 02:22:53 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:22:53 @monitor.py:363][0m cost: 4582.3
+[32m[1218 02:22:53 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:22:53 @monitor.py:363][0m test_cost: 4503.6
+[32m[1218 02:22:53 @monitor.py:363][0m test_perplexity: 7.6307e+55
+[32m[1218 02:22:53 @monitor.py:363][0m validation_cost: 4505.5
+[32m[1218 02:22:53 @monitor.py:363][0m validation_perplexity: 8.0624e+55
+[32m[1218 02:22:53 @group.py:42][0m Callbacks took 8.542 sec in total. ModelSaver: 4.335sec
+[32m[1218 02:22:53 @base.py:245][0m Start Epoch 27 ...
+[32m[1218 02:25:41 @base.py:255][0m Epoch 27 (global_step 35829) finished, time:168.12 sec.
+[32m[1218 02:25:45 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-35829.
+[32m[1218 02:25:45 @param.py:144][0m After epoch 27, learning_rate will change to 0.00922337
+[32m[1218 02:25:50 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:25:50 @monitor.py:363][0m cost: 4474.8
+[32m[1218 02:25:50 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:25:50 @monitor.py:363][0m test_cost: 4329.3
+[32m[1218 02:25:50 @monitor.py:363][0m test_perplexity: 5.2433e+53
+[32m[1218 02:25:50 @monitor.py:363][0m validation_cost: 4273.1
+[32m[1218 02:25:50 @monitor.py:363][0m validation_perplexity: 1.0519e+53
+[32m[1218 02:25:50 @group.py:42][0m Callbacks took 8.998 sec in total. ModelSaver: 4.198sec
+[32m[1218 02:25:50 @base.py:245][0m Start Epoch 28 ...
+[32m[1218 02:28:36 @base.py:255][0m Epoch 28 (global_step 37156) finished, time:165.89 sec.
+[32m[1218 02:28:39 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-37156.
+[32m[1218 02:28:39 @param.py:144][0m After epoch 28, learning_rate will change to 0.00737870
+[32m[1218 02:28:44 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:28:44 @monitor.py:363][0m cost: 4628
+[32m[1218 02:28:44 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:28:44 @monitor.py:363][0m test_cost: 4086.3
+[32m[1218 02:28:44 @monitor.py:363][0m test_perplexity: 5.0688e+50
+[32m[1218 02:28:44 @monitor.py:363][0m validation_cost: 4094.5
+[32m[1218 02:28:44 @monitor.py:363][0m validation_perplexity: 6.4095e+50
+[32m[1218 02:28:44 @group.py:42][0m Callbacks took 8.200 sec in total. ModelSaver: 3.293sec
+[32m[1218 02:28:44 @base.py:245][0m Start Epoch 29 ...
+[32m[1218 02:31:28 @base.py:255][0m Epoch 29 (global_step 38483) finished, time:164.41 sec.
+[32m[1218 02:31:33 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-38483.
+[32m[1218 02:31:33 @param.py:144][0m After epoch 29, learning_rate will change to 0.00590296
+[32m[1218 02:31:37 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:31:37 @monitor.py:363][0m cost: 4487.4
+[32m[1218 02:31:37 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:31:37 @monitor.py:363][0m test_cost: 5982.2
+[32m[1218 02:31:37 @monitor.py:363][0m test_perplexity: 1.6983e+74
+[32m[1218 02:31:37 @monitor.py:363][0m validation_cost: 5984.2
+[32m[1218 02:31:37 @monitor.py:363][0m validation_perplexity: 1.7941e+74
+[32m[1218 02:31:37 @group.py:42][0m Callbacks took 7.538 sec in total. ModelSaver: 3.470sec
+[32m[1218 02:31:37 @base.py:245][0m Start Epoch 30 ...
+[32m[1218 02:34:29 @base.py:255][0m Epoch 30 (global_step 39810) finished, time:172.17 sec.
+[32m[1218 02:34:34 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-39810.
+[32m[1218 02:34:34 @param.py:144][0m After epoch 30, learning_rate will change to 0.00472237
+[32m[1218 02:34:37 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:34:37 @monitor.py:363][0m cost: 4559.1
+[32m[1218 02:34:37 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:34:37 @monitor.py:363][0m test_cost: 5464
+[32m[1218 02:34:37 @monitor.py:363][0m test_perplexity: 6.3034e+67
+[32m[1218 02:34:37 @monitor.py:363][0m validation_cost: 5546.6
+[32m[1218 02:34:37 @monitor.py:363][0m validation_perplexity: 6.6764e+68
+[32m[1218 02:34:37 @group.py:42][0m Callbacks took 8.532 sec in total. ModelSaver: 4.744sec
+[32m[1218 02:34:37 @base.py:245][0m Start Epoch 31 ...
+[32m[1218 02:37:25 @base.py:255][0m Epoch 31 (global_step 41137) finished, time:167.89 sec.
+[32m[1218 02:37:28 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-41137.
+[32m[1218 02:37:28 @param.py:144][0m After epoch 31, learning_rate will change to 0.00377789
+[32m[1218 02:37:32 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:37:32 @monitor.py:363][0m cost: 4428
+[32m[1218 02:37:32 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:37:32 @monitor.py:363][0m test_cost: 4584.9
+[32m[1218 02:37:32 @monitor.py:363][0m test_perplexity: 7.7779e+56
+[32m[1218 02:37:32 @monitor.py:363][0m validation_cost: 4634.6
+[32m[1218 02:37:32 @monitor.py:363][0m validation_perplexity: 3.2244e+57
+[32m[1218 02:37:32 @group.py:42][0m Callbacks took 6.594 sec in total. ModelSaver: 2.842sec
+[32m[1218 02:37:32 @base.py:245][0m Start Epoch 32 ...
+[32m[1218 02:40:14 @base.py:255][0m Epoch 32 (global_step 42464) finished, time:161.66 sec.
+[32m[1218 02:40:14 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-42464.
+[32m[1218 02:40:14 @param.py:144][0m After epoch 32, learning_rate will change to 0.00302231
+[32m[1218 02:40:18 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:40:18 @monitor.py:363][0m cost: 4430.3
+[32m[1218 02:40:18 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:40:18 @monitor.py:363][0m test_cost: 4273.9
+[32m[1218 02:40:18 @monitor.py:363][0m test_perplexity: 1.0784e+53
+[32m[1218 02:40:18 @monitor.py:363][0m validation_cost: 4332.6
+[32m[1218 02:40:18 @monitor.py:363][0m validation_perplexity: 5.7595e+53
+[32m[1218 02:40:18 @group.py:42][0m Callbacks took 4.153 sec in total. InferenceRunner: 1.764sec; InferenceRunner: 1.906sec
+[32m[1218 02:40:18 @base.py:245][0m Start Epoch 33 ...
+[32m[1218 02:43:07 @base.py:255][0m Epoch 33 (global_step 43791) finished, time:168.89 sec.
+[32m[1218 02:43:08 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-43791.
+[32m[1218 02:43:08 @param.py:144][0m After epoch 33, learning_rate will change to 0.00241785
+[32m[1218 02:43:11 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:43:11 @monitor.py:363][0m cost: 4407.8
+[32m[1218 02:43:11 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:43:11 @monitor.py:363][0m test_cost: 4281.5
+[32m[1218 02:43:11 @monitor.py:363][0m test_perplexity: 1.3375e+53
+[32m[1218 02:43:11 @monitor.py:363][0m validation_cost: 4293
+[32m[1218 02:43:11 @monitor.py:363][0m validation_perplexity: 1.8566e+53
+[32m[1218 02:43:11 @group.py:42][0m Callbacks took 4.615 sec in total. InferenceRunner: 1.815sec; InferenceRunner: 1.887sec
+[32m[1218 02:43:11 @base.py:245][0m Start Epoch 34 ...
+[32m[1218 02:45:57 @base.py:255][0m Epoch 34 (global_step 45118) finished, time:166.00 sec.
+[32m[1218 02:46:00 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-45118.
+[32m[1218 02:46:00 @param.py:144][0m After epoch 34, learning_rate will change to 0.00193428
+[32m[1218 02:46:04 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:46:04 @monitor.py:363][0m cost: 4381.9
+[32m[1218 02:46:04 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:46:04 @monitor.py:363][0m test_cost: 3867.9
+[32m[1218 02:46:04 @monitor.py:363][0m test_perplexity: 9.8637e+47
+[32m[1218 02:46:04 @monitor.py:363][0m validation_cost: 3811.3
+[32m[1218 02:46:04 @monitor.py:363][0m validation_perplexity: 1.9603e+47
+[32m[1218 02:46:04 @group.py:42][0m Callbacks took 6.842 sec in total. ModelSaver: 2.430sec; InferenceRunner: 2.073sec
+[32m[1218 02:46:04 @base.py:245][0m Start Epoch 35 ...
+[32m[1218 02:48:52 @base.py:255][0m Epoch 35 (global_step 46445) finished, time:168.25 sec.
+[32m[1218 02:48:54 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-46445.
+[32m[1218 02:48:54 @param.py:144][0m After epoch 35, learning_rate will change to 0.00154743
+[32m[1218 02:48:58 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:48:58 @monitor.py:363][0m cost: 4383.4
+[32m[1218 02:48:58 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:48:58 @monitor.py:363][0m test_cost: 4198.2
+[32m[1218 02:48:58 @monitor.py:363][0m test_perplexity: 1.2381e+52
+[32m[1218 02:48:58 @monitor.py:363][0m validation_cost: 4189.3
+[32m[1218 02:48:58 @monitor.py:363][0m validation_perplexity: 9.6199e+51
+[32m[1218 02:48:58 @group.py:42][0m Callbacks took 5.672 sec in total. ModelSaver: 2.027sec; InferenceRunner: 1.706sec; InferenceRunner: 1.933sec
+[32m[1218 02:48:58 @base.py:245][0m Start Epoch 36 ...
+[32m[1218 02:51:42 @base.py:255][0m Epoch 36 (global_step 47772) finished, time:163.81 sec.
+[32m[1218 02:51:43 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-47772.
+[32m[1218 02:51:43 @param.py:144][0m After epoch 36, learning_rate will change to 0.00123794
+[32m[1218 02:51:47 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:51:47 @monitor.py:363][0m cost: 4362.7
+[32m[1218 02:51:47 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:51:47 @monitor.py:363][0m test_cost: 4424.5
+[32m[1218 02:51:47 @monitor.py:363][0m test_perplexity: 7.9723e+54
+[32m[1218 02:51:47 @monitor.py:363][0m validation_cost: 4438.7
+[32m[1218 02:51:47 @monitor.py:363][0m validation_perplexity: 1.1934e+55
+[32m[1218 02:51:47 @group.py:42][0m Callbacks took 4.839 sec in total. InferenceRunner: 1.810sec; InferenceRunner: 1.893sec
+[32m[1218 02:51:47 @base.py:245][0m Start Epoch 37 ...
+[32m[1218 02:54:26 @base.py:255][0m Epoch 37 (global_step 49099) finished, time:159.27 sec.
+[32m[1218 02:54:26 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-49099.
+[32m[1218 02:54:26 @param.py:144][0m After epoch 37, learning_rate will change to 0.00099035
+[32m[1218 02:54:30 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:54:30 @monitor.py:363][0m cost: 4448
+[32m[1218 02:54:30 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:54:30 @monitor.py:363][0m test_cost: 3898.6
+[32m[1218 02:54:30 @monitor.py:363][0m test_perplexity: 2.3709e+48
+[32m[1218 02:54:30 @monitor.py:363][0m validation_cost: 3918.6
+[32m[1218 02:54:30 @monitor.py:363][0m validation_perplexity: 4.2006e+48
+[32m[1218 02:54:30 @group.py:42][0m Callbacks took 3.728 sec in total. InferenceRunner: 1.694sec; InferenceRunner: 1.899sec
+[32m[1218 02:54:30 @base.py:245][0m Start Epoch 38 ...
+[32m[1218 02:57:18 @base.py:255][0m Epoch 38 (global_step 50426) finished, time:168.53 sec.
+[32m[1218 02:57:19 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-50426.
+[32m[1218 02:57:19 @param.py:144][0m After epoch 38, learning_rate will change to 0.00079228
+[32m[1218 02:57:23 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 02:57:23 @monitor.py:363][0m cost: 4698.7
+[32m[1218 02:57:23 @monitor.py:363][0m perplexity: nan
+[32m[1218 02:57:23 @monitor.py:363][0m test_cost: 4216
+[32m[1218 02:57:23 @monitor.py:363][0m test_perplexity: 2.0618e+52
+[32m[1218 02:57:23 @monitor.py:363][0m validation_cost: 4222.1
+[32m[1218 02:57:23 @monitor.py:363][0m validation_perplexity: 2.452e+52
+[32m[1218 02:57:23 @group.py:42][0m Callbacks took 4.504 sec in total. InferenceRunner: 1.824sec; InferenceRunner: 2.087sec
+[32m[1218 02:57:23 @base.py:245][0m Start Epoch 39 ...
+[32m[1218 03:00:07 @base.py:255][0m Epoch 39 (global_step 51753) finished, time:164.59 sec.
+[32m[1218 03:00:09 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-51753.
+[32m[1218 03:00:09 @param.py:144][0m After epoch 39, learning_rate will change to 0.00063383
+[32m[1218 03:00:12 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:00:12 @monitor.py:363][0m cost: 4371.9
+[32m[1218 03:00:12 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:00:12 @monitor.py:363][0m test_cost: 4124.1
+[32m[1218 03:00:12 @monitor.py:363][0m test_perplexity: 1.4911e+51
+[32m[1218 03:00:12 @monitor.py:363][0m validation_cost: 4091.8
+[32m[1218 03:00:12 @monitor.py:363][0m validation_perplexity: 5.9308e+50
+[32m[1218 03:00:12 @group.py:42][0m Callbacks took 4.852 sec in total. InferenceRunner: 1.733sec; InferenceRunner: 1.891sec
+[32m[1218 03:00:12 @base.py:245][0m Start Epoch 40 ...
+[32m[1218 03:02:59 @base.py:255][0m Epoch 40 (global_step 53080) finished, time:166.74 sec.
+[32m[1218 03:03:01 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-53080.
+[32m[1218 03:03:01 @param.py:144][0m After epoch 40, learning_rate will change to 0.00050706
+[32m[1218 03:03:05 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:03:05 @monitor.py:363][0m cost: 4526.1
+[32m[1218 03:03:05 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:03:05 @monitor.py:363][0m test_cost: 3895.5
+[32m[1218 03:03:05 @monitor.py:363][0m test_perplexity: 2.1701e+48
+[32m[1218 03:03:05 @monitor.py:363][0m validation_cost: 3874.1
+[32m[1218 03:03:05 @monitor.py:363][0m validation_perplexity: 1.1787e+48
+[32m[1218 03:03:05 @group.py:42][0m Callbacks took 5.736 sec in total. ModelSaver: 1.807sec; InferenceRunner: 1.892sec
+[32m[1218 03:03:05 @base.py:245][0m Start Epoch 41 ...
+[32m[1218 03:05:52 @base.py:255][0m Epoch 41 (global_step 54407) finished, time:167.02 sec.
+[32m[1218 03:05:52 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-54407.
+[32m[1218 03:05:52 @param.py:144][0m After epoch 41, learning_rate will change to 0.00040565
+[32m[1218 03:05:56 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:05:56 @monitor.py:363][0m cost: 4486.2
+[32m[1218 03:05:56 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:05:56 @monitor.py:363][0m test_cost: 3863.6
+[32m[1218 03:05:56 @monitor.py:363][0m test_perplexity: 8.7425e+47
+[32m[1218 03:05:56 @monitor.py:363][0m validation_cost: 3925.6
+[32m[1218 03:05:56 @monitor.py:363][0m validation_perplexity: 5.1366e+48
+[32m[1218 03:05:56 @group.py:42][0m Callbacks took 3.843 sec in total. InferenceRunner: 1.714sec; InferenceRunner: 1.924sec
+[32m[1218 03:05:56 @base.py:245][0m Start Epoch 42 ...
+[32m[1218 03:08:42 @base.py:255][0m Epoch 42 (global_step 55734) finished, time:166.57 sec.
+[32m[1218 03:08:44 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-55734.
+[32m[1218 03:08:44 @param.py:144][0m After epoch 42, learning_rate will change to 0.00032452
+[32m[1218 03:08:48 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:08:48 @monitor.py:363][0m cost: 4238.5
+[32m[1218 03:08:48 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:08:48 @monitor.py:363][0m test_cost: 3846.6
+[32m[1218 03:08:48 @monitor.py:363][0m test_perplexity: 5.3654e+47
+[32m[1218 03:08:48 @monitor.py:363][0m validation_cost: 3857.3
+[32m[1218 03:08:48 @monitor.py:363][0m validation_perplexity: 7.2987e+47
+[32m[1218 03:08:48 @group.py:42][0m Callbacks took 5.986 sec in total. ModelSaver: 2.113sec; InferenceRunner: 2.087sec
+[32m[1218 03:08:48 @base.py:245][0m Start Epoch 43 ...
+[32m[1218 03:11:29 @base.py:255][0m Epoch 43 (global_step 57061) finished, time:161.33 sec.
+[32m[1218 03:11:30 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-57061.
+[32m[1218 03:11:30 @param.py:144][0m After epoch 43, learning_rate will change to 0.00025961
+[32m[1218 03:11:34 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:11:34 @monitor.py:363][0m cost: 4591.6
+[32m[1218 03:11:34 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:11:34 @monitor.py:363][0m test_cost: 4528.2
+[32m[1218 03:11:34 @monitor.py:363][0m test_perplexity: 1.5402e+56
+[32m[1218 03:11:34 @monitor.py:363][0m validation_cost: 4555.7
+[32m[1218 03:11:34 @monitor.py:363][0m validation_perplexity: 3.3759e+56
+[32m[1218 03:11:34 @group.py:42][0m Callbacks took 4.616 sec in total. InferenceRunner: 1.793sec; InferenceRunner: 1.926sec
+[32m[1218 03:11:34 @base.py:245][0m Start Epoch 44 ...
+[32m[1218 03:14:20 @base.py:255][0m Epoch 44 (global_step 58388) finished, time:165.50 sec.
+[32m[1218 03:14:21 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-58388.
+[32m[1218 03:14:21 @param.py:144][0m After epoch 44, learning_rate will change to 0.00020769
+[32m[1218 03:14:25 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:14:25 @monitor.py:363][0m cost: 4271.1
+[32m[1218 03:14:25 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:14:25 @monitor.py:363][0m test_cost: 4336
+[32m[1218 03:14:25 @monitor.py:363][0m test_perplexity: 6.3525e+53
+[32m[1218 03:14:25 @monitor.py:363][0m validation_cost: 4308.9
+[32m[1218 03:14:25 @monitor.py:363][0m validation_perplexity: 2.9266e+53
+[32m[1218 03:14:25 @group.py:42][0m Callbacks took 4.835 sec in total. InferenceRunner: 1.688sec; InferenceRunner: 2.050sec
+[32m[1218 03:14:25 @base.py:245][0m Start Epoch 45 ...
+[32m[1218 03:17:11 @base.py:255][0m Epoch 45 (global_step 59715) finished, time:166.70 sec.
+[32m[1218 03:17:11 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-59715.
+[32m[1218 03:17:12 @param.py:144][0m After epoch 45, learning_rate will change to 0.00016615
+[32m[1218 03:17:16 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:17:16 @monitor.py:363][0m cost: 4325.3
+[32m[1218 03:17:16 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:17:16 @monitor.py:363][0m test_cost: 3433.1
+[32m[1218 03:17:16 @monitor.py:363][0m test_perplexity: 3.9784e+42
+[32m[1218 03:17:16 @monitor.py:363][0m validation_cost: 3452.5
+[32m[1218 03:17:16 @monitor.py:363][0m validation_perplexity: 6.9104e+42
+[32m[1218 03:17:16 @group.py:42][0m Callbacks took 4.581 sec in total. InferenceRunner: 1.705sec; InferenceRunner: 1.933sec
+[32m[1218 03:17:16 @base.py:245][0m Start Epoch 46 ...
+[32m[1218 03:19:57 @base.py:255][0m Epoch 46 (global_step 61042) finished, time:161.23 sec.
+[32m[1218 03:19:57 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-61042.
+[32m[1218 03:19:57 @param.py:144][0m After epoch 46, learning_rate will change to 0.00013292
+[32m[1218 03:20:01 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:20:01 @monitor.py:363][0m cost: 4397.7
+[32m[1218 03:20:01 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:20:01 @monitor.py:363][0m test_cost: 3729.4
+[32m[1218 03:20:01 @monitor.py:363][0m test_perplexity: 1.8866e+46
+[32m[1218 03:20:01 @monitor.py:363][0m validation_cost: 3723.5
+[32m[1218 03:20:01 @monitor.py:363][0m validation_perplexity: 1.5951e+46
+[32m[1218 03:20:01 @group.py:42][0m Callbacks took 3.833 sec in total. InferenceRunner: 1.724sec; InferenceRunner: 1.888sec
+[32m[1218 03:20:01 @base.py:245][0m Start Epoch 47 ...
+[32m[1218 03:22:52 @base.py:255][0m Epoch 47 (global_step 62369) finished, time:170.89 sec.
+[32m[1218 03:22:52 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-62369.
+[32m[1218 03:22:52 @param.py:144][0m After epoch 47, learning_rate will change to 0.00010634
+[32m[1218 03:22:56 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:22:56 @monitor.py:363][0m cost: 4424.5
+[32m[1218 03:22:56 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:22:56 @monitor.py:363][0m test_cost: 4034.2
+[32m[1218 03:22:56 @monitor.py:363][0m test_perplexity: 1.1438e+50
+[32m[1218 03:22:56 @monitor.py:363][0m validation_cost: 4015.8
+[32m[1218 03:22:56 @monitor.py:363][0m validation_perplexity: 6.753e+49
+[32m[1218 03:22:56 @group.py:42][0m Callbacks took 4.223 sec in total. InferenceRunner: 1.794sec; InferenceRunner: 2.240sec
+[32m[1218 03:22:56 @base.py:245][0m Start Epoch 48 ...
+[32m[1218 03:25:41 @base.py:255][0m Epoch 48 (global_step 63696) finished, time:164.68 sec.
+[32m[1218 03:25:41 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-63696.
+[32m[1218 03:25:41 @param.py:144][0m After epoch 48, learning_rate will change to 0.00008507
+[32m[1218 03:25:44 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:25:44 @monitor.py:363][0m cost: 4405.4
+[32m[1218 03:25:44 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:25:44 @monitor.py:363][0m test_cost: 4549.2
+[32m[1218 03:25:44 @monitor.py:363][0m test_perplexity: 2.8102e+56
+[32m[1218 03:25:44 @monitor.py:363][0m validation_cost: 4539.9
+[32m[1218 03:25:44 @monitor.py:363][0m validation_perplexity: 2.1555e+56
+[32m[1218 03:25:44 @group.py:42][0m Callbacks took 3.758 sec in total. InferenceRunner: 1.705sec; InferenceRunner: 1.917sec
+[32m[1218 03:25:44 @base.py:245][0m Start Epoch 49 ...
+[32m[1218 03:28:30 @base.py:255][0m Epoch 49 (global_step 65023) finished, time:165.32 sec.
+[32m[1218 03:28:30 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-65023.
+[32m[1218 03:28:30 @param.py:144][0m After epoch 49, learning_rate will change to 0.00006806
+[32m[1218 03:28:34 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:28:34 @monitor.py:363][0m cost: 4451.6
+[32m[1218 03:28:34 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:28:34 @monitor.py:363][0m test_cost: 3879.5
+[32m[1218 03:28:34 @monitor.py:363][0m test_perplexity: 1.3748e+48
+[32m[1218 03:28:34 @monitor.py:363][0m validation_cost: 3894.3
+[32m[1218 03:28:34 @monitor.py:363][0m validation_perplexity: 2.1022e+48
+[32m[1218 03:28:34 @group.py:42][0m Callbacks took 3.931 sec in total. InferenceRunner: 1.828sec; InferenceRunner: 1.987sec
+[32m[1218 03:28:34 @base.py:245][0m Start Epoch 50 ...
+[32m[1218 03:31:21 @base.py:255][0m Epoch 50 (global_step 66350) finished, time:167.58 sec.
+[32m[1218 03:31:23 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-66350.
+[32m[1218 03:31:23 @param.py:144][0m After epoch 50, learning_rate will change to 0.00005445
+[32m[1218 03:31:28 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:31:28 @monitor.py:363][0m cost: 4271.1
+[32m[1218 03:31:28 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:31:28 @monitor.py:363][0m test_cost: 4053
+[32m[1218 03:31:28 @monitor.py:363][0m test_perplexity: 1.9572e+50
+[32m[1218 03:31:28 @monitor.py:363][0m validation_cost: 4047.6
+[32m[1218 03:31:28 @monitor.py:363][0m validation_perplexity: 1.6753e+50
+[32m[1218 03:31:28 @group.py:42][0m Callbacks took 6.223 sec in total. InferenceRunner: 1.987sec
+[32m[1218 03:31:28 @base.py:245][0m Start Epoch 51 ...
+[32m[1218 03:34:09 @base.py:255][0m Epoch 51 (global_step 67677) finished, time:161.27 sec.
+[32m[1218 03:34:09 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-67677.
+[32m[1218 03:34:09 @param.py:144][0m After epoch 51, learning_rate will change to 0.00004356
+[32m[1218 03:34:13 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:34:13 @monitor.py:363][0m cost: 4428.2
+[32m[1218 03:34:13 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:34:13 @monitor.py:363][0m test_cost: 4265.4
+[32m[1218 03:34:13 @monitor.py:363][0m test_perplexity: 8.4543e+52
+[32m[1218 03:34:13 @monitor.py:363][0m validation_cost: 4207.4
+[32m[1218 03:34:13 @monitor.py:363][0m validation_perplexity: 1.6104e+52
+[32m[1218 03:34:13 @group.py:42][0m Callbacks took 3.802 sec in total. InferenceRunner: 1.705sec; InferenceRunner: 1.912sec
+[32m[1218 03:34:13 @base.py:245][0m Start Epoch 52 ...
+[32m[1218 03:37:07 @base.py:255][0m Epoch 52 (global_step 69004) finished, time:174.11 sec.
+[32m[1218 03:37:07 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-69004.
+[32m[1218 03:37:07 @param.py:144][0m After epoch 52, learning_rate will change to 0.00003484
+[32m[1218 03:37:11 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:37:11 @monitor.py:363][0m cost: 4370.4
+[32m[1218 03:37:11 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:37:11 @monitor.py:363][0m test_cost: 4481.9
+[32m[1218 03:37:11 @monitor.py:363][0m test_perplexity: 4.1069e+55
+[32m[1218 03:37:11 @monitor.py:363][0m validation_cost: 4462.6
+[32m[1218 03:37:11 @monitor.py:363][0m validation_perplexity: 2.3628e+55
+[32m[1218 03:37:11 @group.py:42][0m Callbacks took 3.956 sec in total. InferenceRunner: 1.818sec; InferenceRunner: 1.907sec
+[32m[1218 03:37:11 @base.py:245][0m Start Epoch 53 ...
+[32m[1218 03:39:52 @base.py:255][0m Epoch 53 (global_step 70331) finished, time:161.66 sec.
+[32m[1218 03:39:53 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-70331.
+[32m[1218 03:39:53 @param.py:144][0m After epoch 53, learning_rate will change to 0.00002788
+[32m[1218 03:39:57 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:39:57 @monitor.py:363][0m cost: 4412.1
+[32m[1218 03:39:57 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:39:57 @monitor.py:363][0m test_cost: 3859
+[32m[1218 03:39:57 @monitor.py:363][0m test_perplexity: 7.6621e+47
+[32m[1218 03:39:57 @monitor.py:363][0m validation_cost: 3869.2
+[32m[1218 03:39:57 @monitor.py:363][0m validation_perplexity: 1.0233e+48
+[32m[1218 03:39:57 @group.py:42][0m Callbacks took 4.065 sec in total. InferenceRunner: 1.801sec; InferenceRunner: 1.951sec
+[32m[1218 03:39:57 @base.py:245][0m Start Epoch 54 ...
+[32m[1218 03:42:36 @base.py:255][0m Epoch 54 (global_step 71658) finished, time:159.08 sec.
+[32m[1218 03:42:36 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-71658.
+[32m[1218 03:42:36 @param.py:144][0m After epoch 54, learning_rate will change to 0.00002230
+[32m[1218 03:42:40 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:42:40 @monitor.py:363][0m cost: 4531.2
+[32m[1218 03:42:40 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:42:40 @monitor.py:363][0m test_cost: 4075.4
+[32m[1218 03:42:40 @monitor.py:363][0m test_perplexity: 3.7098e+50
+[32m[1218 03:42:40 @monitor.py:363][0m validation_cost: 4121.5
+[32m[1218 03:42:40 @monitor.py:363][0m validation_perplexity: 1.3849e+51
+[32m[1218 03:42:40 @group.py:42][0m Callbacks took 4.207 sec in total. InferenceRunner: 1.733sec; InferenceRunner: 1.930sec
+[32m[1218 03:42:40 @base.py:245][0m Start Epoch 55 ...
+[32m[1218 03:45:19 @base.py:255][0m Epoch 55 (global_step 72985) finished, time:159.19 sec.
+[32m[1218 03:45:20 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-72985.
+[32m[1218 03:45:20 @param.py:144][0m After epoch 55, learning_rate will change to 0.00001784
+[32m[1218 03:45:24 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:45:24 @monitor.py:363][0m cost: 4357.3
+[32m[1218 03:45:24 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:45:24 @monitor.py:363][0m test_cost: 3772.2
+[32m[1218 03:45:24 @monitor.py:363][0m test_perplexity: 6.4202e+46
+[32m[1218 03:45:24 @monitor.py:363][0m validation_cost: 3756
+[32m[1218 03:45:24 @monitor.py:363][0m validation_perplexity: 4.0367e+46
+[32m[1218 03:45:24 @group.py:42][0m Callbacks took 4.599 sec in total. InferenceRunner: 1.839sec; InferenceRunner: 1.913sec
+[32m[1218 03:45:24 @base.py:245][0m Start Epoch 56 ...
+[32m[1218 03:48:09 @base.py:255][0m Epoch 56 (global_step 74312) finished, time:165.40 sec.
+[32m[1218 03:48:10 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-74312.
+[32m[1218 03:48:10 @param.py:144][0m After epoch 56, learning_rate will change to 0.00001427
+[32m[1218 03:48:13 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:48:13 @monitor.py:363][0m cost: 4274
+[32m[1218 03:48:13 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:48:13 @monitor.py:363][0m test_cost: 3990
+[32m[1218 03:48:13 @monitor.py:363][0m test_perplexity: 3.2329e+49
+[32m[1218 03:48:13 @monitor.py:363][0m validation_cost: 4006.9
+[32m[1218 03:48:13 @monitor.py:363][0m validation_perplexity: 5.2452e+49
+[32m[1218 03:48:13 @group.py:42][0m Callbacks took 3.928 sec in total. InferenceRunner: 1.697sec; InferenceRunner: 2.022sec
+[32m[1218 03:48:13 @base.py:245][0m Start Epoch 57 ...
+[32m[1218 03:50:58 @base.py:255][0m Epoch 57 (global_step 75639) finished, time:164.61 sec.
+[32m[1218 03:50:59 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-75639.
+[32m[1218 03:50:59 @param.py:144][0m After epoch 57, learning_rate will change to 0.00001142
+[32m[1218 03:51:02 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:51:02 @monitor.py:363][0m cost: 4210.7
+[32m[1218 03:51:02 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:51:02 @monitor.py:363][0m test_cost: 4432.2
+[32m[1218 03:51:02 @monitor.py:363][0m test_perplexity: 9.9317e+54
+[32m[1218 03:51:02 @monitor.py:363][0m validation_cost: 4490.5
+[32m[1218 03:51:02 @monitor.py:363][0m validation_perplexity: 5.2479e+55
+[32m[1218 03:51:02 @group.py:42][0m Callbacks took 3.970 sec in total. InferenceRunner: 1.727sec; InferenceRunner: 2.080sec
+[32m[1218 03:51:02 @base.py:245][0m Start Epoch 58 ...
+[32m[1218 03:53:41 @base.py:255][0m Epoch 58 (global_step 76966) finished, time:158.94 sec.
+[32m[1218 03:53:42 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-76966.
+[32m[1218 03:53:42 @param.py:144][0m After epoch 58, learning_rate will change to 0.00000913
+[32m[1218 03:53:45 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:53:45 @monitor.py:363][0m cost: 4291.1
+[32m[1218 03:53:45 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:53:45 @monitor.py:363][0m test_cost: 3674.5
+[32m[1218 03:53:45 @monitor.py:363][0m test_perplexity: 3.9335e+45
+[32m[1218 03:53:45 @monitor.py:363][0m validation_cost: 3691.6
+[32m[1218 03:53:45 @monitor.py:363][0m validation_perplexity: 6.407e+45
+[32m[1218 03:53:45 @group.py:42][0m Callbacks took 3.808 sec in total. InferenceRunner: 1.718sec; InferenceRunner: 1.894sec
+[32m[1218 03:53:45 @base.py:245][0m Start Epoch 59 ...
+[32m[1218 03:56:24 @base.py:255][0m Epoch 59 (global_step 78293) finished, time:159.28 sec.
+[32m[1218 03:56:26 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-78293.
+[32m[1218 03:56:26 @param.py:144][0m After epoch 59, learning_rate will change to 0.00000731
+[32m[1218 03:56:30 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:56:30 @monitor.py:363][0m cost: 4205.7
+[32m[1218 03:56:30 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:56:30 @monitor.py:363][0m test_cost: 3728.8
+[32m[1218 03:56:30 @monitor.py:363][0m test_perplexity: 1.8535e+46
+[32m[1218 03:56:30 @monitor.py:363][0m validation_cost: 3747.8
+[32m[1218 03:56:30 @monitor.py:363][0m validation_perplexity: 3.1928e+46
+[32m[1218 03:56:30 @group.py:42][0m Callbacks took 5.490 sec in total. InferenceRunner: 1.937sec; InferenceRunner: 1.933sec
+[32m[1218 03:56:30 @base.py:245][0m Start Epoch 60 ...
+[32m[1218 03:59:09 @base.py:255][0m Epoch 60 (global_step 79620) finished, time:159.27 sec.
+[32m[1218 03:59:09 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-79620.
+[32m[1218 03:59:09 @param.py:144][0m After epoch 60, learning_rate will change to 0.00000585
+[32m[1218 03:59:13 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 03:59:13 @monitor.py:363][0m cost: 4377.9
+[32m[1218 03:59:13 @monitor.py:363][0m perplexity: nan
+[32m[1218 03:59:13 @monitor.py:363][0m test_cost: 4458.9
+[32m[1218 03:59:13 @monitor.py:363][0m test_perplexity: 2.1274e+55
+[32m[1218 03:59:13 @monitor.py:363][0m validation_cost: 4447.7
+[32m[1218 03:59:13 @monitor.py:363][0m validation_perplexity: 1.5433e+55
+[32m[1218 03:59:13 @group.py:42][0m Callbacks took 3.892 sec in total. InferenceRunner: 1.732sec; InferenceRunner: 1.988sec
+[32m[1218 03:59:13 @base.py:245][0m Start Epoch 61 ...
+[32m[1218 04:02:02 @base.py:255][0m Epoch 61 (global_step 80947) finished, time:168.79 sec.
+[32m[1218 04:02:04 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-80947.
+[32m[1218 04:02:04 @param.py:144][0m After epoch 61, learning_rate will change to 0.00000468
+[32m[1218 04:02:07 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 04:02:07 @monitor.py:363][0m cost: 4190.9
+[32m[1218 04:02:07 @monitor.py:363][0m perplexity: nan
+[32m[1218 04:02:07 @monitor.py:363][0m test_cost: 3652.5
+[32m[1218 04:02:07 @monitor.py:363][0m test_perplexity: 2.0985e+45
+[32m[1218 04:02:07 @monitor.py:363][0m validation_cost: 3720.6
+[32m[1218 04:02:07 @monitor.py:363][0m validation_perplexity: 1.4699e+46
+[32m[1218 04:02:07 @group.py:42][0m Callbacks took 5.515 sec in total. InferenceRunner: 1.927sec; InferenceRunner: 1.917sec
+[32m[1218 04:02:07 @base.py:245][0m Start Epoch 62 ...
+[32m[1218 04:04:47 @base.py:255][0m Epoch 62 (global_step 82274) finished, time:159.36 sec.
+[32m[1218 04:04:47 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-82274.
+[32m[1218 04:04:47 @param.py:144][0m After epoch 62, learning_rate will change to 0.00000374
+[32m[1218 04:04:51 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 04:04:51 @monitor.py:363][0m cost: 4242.5
+[32m[1218 04:04:51 @monitor.py:363][0m perplexity: nan
+[32m[1218 04:04:51 @monitor.py:363][0m test_cost: 4943.8
+[32m[1218 04:04:51 @monitor.py:363][0m test_perplexity: 2.2091e+61
+[32m[1218 04:04:51 @monitor.py:363][0m validation_cost: 4908.9
+[32m[1218 04:04:51 @monitor.py:363][0m validation_perplexity: 8.171e+60
+[32m[1218 04:04:51 @group.py:42][0m Callbacks took 3.834 sec in total. InferenceRunner: 1.700sec; InferenceRunner: 1.901sec
+[32m[1218 04:04:51 @base.py:245][0m Start Epoch 63 ...
+[32m[1218 04:07:41 @base.py:255][0m Epoch 63 (global_step 83601) finished, time:169.95 sec.
+[32m[1218 04:07:41 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-83601.
+[32m[1218 04:07:41 @param.py:144][0m After epoch 63, learning_rate will change to 0.00000299
+[32m[1218 04:07:44 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 04:07:44 @monitor.py:363][0m cost: 4428.5
+[32m[1218 04:07:44 @monitor.py:363][0m perplexity: nan
+[32m[1218 04:07:44 @monitor.py:363][0m test_cost: 4357.9
+[32m[1218 04:07:44 @monitor.py:363][0m test_perplexity: 1.1869e+54
+[32m[1218 04:07:44 @monitor.py:363][0m validation_cost: 4363.1
+[32m[1218 04:07:44 @monitor.py:363][0m validation_perplexity: 1.3765e+54
+[32m[1218 04:07:44 @group.py:42][0m Callbacks took 3.905 sec in total. InferenceRunner: 1.715sec; InferenceRunner: 1.957sec
+[32m[1218 04:07:44 @base.py:245][0m Start Epoch 64 ...
+[32m[1218 04:10:24 @base.py:255][0m Epoch 64 (global_step 84928) finished, time:159.26 sec.
+[32m[1218 04:10:24 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-84928.
+[32m[1218 04:10:24 @param.py:144][0m After epoch 64, learning_rate will change to 0.00000239
+[32m[1218 04:10:28 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 04:10:28 @monitor.py:363][0m cost: 4209.9
+[32m[1218 04:10:28 @monitor.py:363][0m perplexity: nan
+[32m[1218 04:10:28 @monitor.py:363][0m test_cost: 4284.1
+[32m[1218 04:10:28 @monitor.py:363][0m test_perplexity: 1.4413e+53
+[32m[1218 04:10:28 @monitor.py:363][0m validation_cost: 4272.4
+[32m[1218 04:10:28 @monitor.py:363][0m validation_perplexity: 1.033e+53
+[32m[1218 04:10:28 @group.py:42][0m Callbacks took 3.828 sec in total. InferenceRunner: 1.785sec; InferenceRunner: 1.896sec
+[32m[1218 04:10:28 @base.py:245][0m Start Epoch 65 ...
+[32m[1218 04:13:07 @base.py:255][0m Epoch 65 (global_step 86255) finished, time:159.03 sec.
+[32m[1218 04:13:07 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-86255.
+[32m[1218 04:13:07 @param.py:144][0m After epoch 65, learning_rate will change to 0.00000192
+[32m[1218 04:13:12 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 04:13:12 @monitor.py:363][0m cost: 4120.1
+[32m[1218 04:13:12 @monitor.py:363][0m perplexity: nan
+[32m[1218 04:13:12 @monitor.py:363][0m test_cost: 5125.2
+[32m[1218 04:13:12 @monitor.py:363][0m test_perplexity: 3.9451e+63
+[32m[1218 04:13:12 @monitor.py:363][0m validation_cost: 5057.1
+[32m[1218 04:13:12 @monitor.py:363][0m validation_perplexity: 5.6294e+62
+[32m[1218 04:13:12 @group.py:42][0m Callbacks took 5.088 sec in total. InferenceRunner: 1.704sec; InferenceRunner: 1.900sec
+[32m[1218 04:13:12 @base.py:245][0m Start Epoch 66 ...
+[32m[1218 04:16:02 @base.py:255][0m Epoch 66 (global_step 87582) finished, time:170.62 sec.
+[32m[1218 04:16:03 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-87582.
+[32m[1218 04:16:03 @param.py:144][0m After epoch 66, learning_rate will change to 0.00000153
+[32m[1218 04:16:07 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 04:16:07 @monitor.py:363][0m cost: 4144.9
+[32m[1218 04:16:07 @monitor.py:363][0m perplexity: nan
+[32m[1218 04:16:07 @monitor.py:363][0m test_cost: 3798.1
+[32m[1218 04:16:07 @monitor.py:363][0m test_perplexity: 1.3425e+47
+[32m[1218 04:16:07 @monitor.py:363][0m validation_cost: 3779.3
+[32m[1218 04:16:07 @monitor.py:363][0m validation_perplexity: 7.8469e+46
+[32m[1218 04:16:07 @group.py:42][0m Callbacks took 4.155 sec in total. InferenceRunner: 1.820sec; InferenceRunner: 2.059sec
+[32m[1218 04:16:07 @base.py:245][0m Start Epoch 67 ...
+[32m[1218 04:18:46 @base.py:255][0m Epoch 67 (global_step 88909) finished, time:159.43 sec.
+[32m[1218 04:18:47 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-88909.
+[32m[1218 04:18:47 @param.py:144][0m After epoch 67, learning_rate will change to 0.00000123
+[32m[1218 04:18:51 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 04:18:51 @monitor.py:363][0m cost: 4394.5
+[32m[1218 04:18:51 @monitor.py:363][0m perplexity: nan
+[32m[1218 04:18:51 @monitor.py:363][0m test_cost: 4096.9
+[32m[1218 04:18:51 @monitor.py:363][0m test_perplexity: 6.8646e+50
+[32m[1218 04:18:51 @monitor.py:363][0m validation_cost: 4066.9
+[32m[1218 04:18:51 @monitor.py:363][0m validation_perplexity: 2.9099e+50
+[32m[1218 04:18:51 @group.py:42][0m Callbacks took 5.030 sec in total. InferenceRunner: 1.737sec; InferenceRunner: 2.040sec
+[32m[1218 04:18:51 @base.py:245][0m Start Epoch 68 ...
+[32m[1218 04:21:32 @base.py:255][0m Epoch 68 (global_step 90236) finished, time:161.44 sec.
+[32m[1218 04:21:33 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-90236.
+[32m[1218 04:21:33 @param.py:144][0m After epoch 68, learning_rate will change to 0.00000098
+[32m[1218 04:21:36 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 04:21:36 @monitor.py:363][0m cost: 4102.1
+[32m[1218 04:21:36 @monitor.py:363][0m perplexity: nan
+[32m[1218 04:21:36 @monitor.py:363][0m test_cost: 5533.6
+[32m[1218 04:21:36 @monitor.py:363][0m test_perplexity: 4.6104e+68
+[32m[1218 04:21:36 @monitor.py:363][0m validation_cost: 5521.8
+[32m[1218 04:21:36 @monitor.py:363][0m validation_perplexity: 3.285e+68
+[32m[1218 04:21:36 @group.py:42][0m Callbacks took 3.969 sec in total. InferenceRunner: 1.769sec; InferenceRunner: 1.981sec
+[32m[1218 04:21:36 @base.py:245][0m Start Epoch 69 ...
+[32m[1218 04:24:16 @base.py:255][0m Epoch 69 (global_step 91563) finished, time:159.26 sec.
+[32m[1218 04:24:16 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-91563.
+[32m[1218 04:24:16 @param.py:144][0m After epoch 69, learning_rate will change to 0.00000078
+[32m[1218 04:24:20 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 04:24:20 @monitor.py:363][0m cost: 4244.2
+[32m[1218 04:24:20 @monitor.py:363][0m perplexity: nan
+[32m[1218 04:24:20 @monitor.py:363][0m test_cost: 3632.2
+[32m[1218 04:24:20 @monitor.py:363][0m test_perplexity: 1.1739e+45
+[32m[1218 04:24:20 @monitor.py:363][0m validation_cost: 3617.2
+[32m[1218 04:24:20 @monitor.py:363][0m validation_perplexity: 7.6576e+44
+[32m[1218 04:24:20 @group.py:42][0m Callbacks took 3.968 sec in total. InferenceRunner: 1.749sec; InferenceRunner: 2.003sec
+[32m[1218 04:24:20 @base.py:245][0m Start Epoch 70 ...
+[32m[1218 04:26:59 @base.py:255][0m Epoch 70 (global_step 92890) finished, time:159.02 sec.
+[32m[1218 04:26:59 @saver.py:82][0m Model saved to train_log/PTB-LSTM/model-92890.
+[32m[1218 04:26:59 @param.py:144][0m After epoch 70, learning_rate will change to 0.00000063
+[32m[1218 04:27:02 @monitor.py:363][0m TensorInput/PTBProducer/input_producer/fraction_of_32_full: 1
+[32m[1218 04:27:02 @monitor.py:363][0m cost: 4230.4
+[32m[1218 04:27:02 @monitor.py:363][0m perplexity: nan
+[32m[1218 04:27:02 @monitor.py:363][0m test_cost: 4416.9
+[32m[1218 04:27:02 @monitor.py:363][0m test_perplexity: 6.4031e+54
+[32m[1218 04:27:02 @monitor.py:363][0m validation_cost: 4412.4
+[32m[1218 04:27:02 @monitor.py:363][0m validation_perplexity: 5.6305e+54
+[32m[1218 04:27:02 @group.py:42][0m Callbacks took 3.748 sec in total. InferenceRunner: 1.687sec; InferenceRunner: 1.899sec
+[32m[1218 04:27:02 @base.py:259][0m Training has finished!
