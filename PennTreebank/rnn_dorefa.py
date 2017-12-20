@@ -371,6 +371,7 @@ class BasicLSTMCell(RNNCell):
     self._state_is_tuple = state_is_tuple
     self._activation = activation or math_ops.tanh
     self.fg=fg
+    #print ("fg is: " + repr(fg))
 
   @property
   def state_size(self):
@@ -397,7 +398,10 @@ class BasicLSTMCell(RNNCell):
         `state_is_tuple`).
     """
     #sigmoid = math_ops.sigmoid
-    def sigmoid(x):
+    def sigmoid(x): 
+      # return tf.clip_by_value((0.2 * x) + 0.5, 0.0, 1.0) 
+      # from Loss Aware Binarization theano hard-sigmoid
+
       return tf.clip_by_value((x+1.)/2.,0,1) #(x, 0.0, 1.0)
 
 
@@ -407,7 +411,7 @@ class BasicLSTMCell(RNNCell):
       def ide(x):return x
       self.fg = ide
 
-    print ("fg is: " + repr(self.fg))
+    #print ("fg is: " + repr(self.fg))
 
     #fg
     fg=self.fg
@@ -418,7 +422,7 @@ class BasicLSTMCell(RNNCell):
     else:
       c, h = array_ops.split(value=state, num_or_size_splits=2, axis=1)
 
-    c=fg(c); h=fg(h)
+    #c=fg(c); h=fg(h)
 
     # print("checking here")
     # print([inputs, h])
@@ -427,16 +431,16 @@ class BasicLSTMCell(RNNCell):
     # i = input_gate, j = new_input, f = forget_gate, o = output_gate
     i, j, f, o = array_ops.split(value=concat, num_or_size_splits=4, axis=1)
 
-    i=fg(i); j=fg(j); f=fg(f); o=fg(o)  
+    #i=fg(i); j=fg(j); f=fg(f); o=fg(o)  
 
 
 
     new_c = (
         c * sigmoid(f + self._forget_bias) + sigmoid(i) * self._activation(j))
 
-    new_c=fg(new_c)
+    #new_c=fg(new_c)
     new_h = self._activation(new_c) * sigmoid(o)
-    new_h=fg(new_h)
+    #new_h=fg(new_h)
 
     # if self.fg:
       # i=fg(i); j=fg(j); f=fg(f); o=fg(o)

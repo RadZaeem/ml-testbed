@@ -47,6 +47,7 @@ TEST_URL = 'https://raw.githubusercontent.com/tomsercu/lstm/master/data/ptb.test
 BITW = 1
 BITA = 2
 BITG = 6
+BITG = 32
 TOTAL_BATCH_SIZE = 128
 BATCH_SIZE = None
 
@@ -79,6 +80,10 @@ class Model(ModelDesc):
         # monkey-patch tf.get_variable to apply fw
         def new_get_variable(v):
             name = v.op.name
+            logger.info("Binarizing weight {}".format(v.op.name))
+                
+            return fw(v)
+
             # don't binarize first and last layer
             if not name.endswith('W') or 'conv0' in name or 'fct' in name:
                 return v
@@ -97,7 +102,7 @@ class Model(ModelDesc):
         def get_basic_cell():
             cell = rnn_dorefa.BasicLSTMCell(fg=fg, num_units=HIDDEN_SIZE, activation=activate, forget_bias=0.0, reuse=tf.get_variable_scope().reuse)
             if is_training:
-                cell = rnn.DropoutWrapper(cell, output_keep_prob=DROPOUT)
+                pass#cell = rnn.DropoutWrapper(cell, output_keep_prob=DROPOUT)
             return cell
 
         with remap_variables(new_get_variable):#, \
@@ -119,7 +124,7 @@ class Model(ModelDesc):
 
             embeddingW = tf.get_variable('embedding', [VOCAB_SIZE, HIDDEN_SIZE], initializer=initializer)
             input_feature = tf.nn.embedding_lookup(embeddingW, input)  # B x seqlen x hiddensize
-            input_feature = Dropout(input_feature, DROPOUT)
+            #input_feature = Dropout(input_feature, DROPOUT)
 
             with tf.variable_scope('LSTM', initializer=initializer):
                 input_list = tf.unstack(input_feature, num=SEQ_LEN, axis=1)  # seqlen x (Bxhidden)
@@ -219,7 +224,7 @@ if __name__ == '__main__':
     parser.add_argument('--load', help='load model')
     args = parser.parse_args()
     if args.gpu:
-        os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
+        pass#os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
     config = get_config()
     if args.load:
