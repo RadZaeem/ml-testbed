@@ -1,0 +1,3 @@
+I tensorflow/core/common_runtime/simple_placer.cc:827] model/Placeholder_1: (Placeholder)/job:localhost/replica:0/task:0/gpu:0
+Test Perplexity: 149.563
+

@@ -1,0 +1,1 @@
+| end of epoch  40 | time: 52.63s | valid loss  4.75 | valid ppl   115.21 
