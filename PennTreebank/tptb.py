@@ -93,7 +93,7 @@ class Model(ModelDesc):
 
         def get_basic_cell():
             # cell = rnn.BasicLSTMCell(num_units=conf.hidden_size, forget_bias=0.0, reuse=tf.get_variable_scope().reuse)
-            cell = ttq_rnn.TtqLSTMCell(num_units=conf.hidden_size,thre=0.05,#)
+            cell = ttq_rnn.TtqLSTMCell(num_units=conf.hidden_size,thre=0.01,#)
                 forget_bias=0.0, reuse=tf.get_variable_scope().reuse)
             if is_training and conf.keep_prob < 1:
                 cell = rnn.DropoutWrapper(cell, output_keep_prob=conf.keep_prob)

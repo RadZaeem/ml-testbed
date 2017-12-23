@@ -62,7 +62,9 @@ def main(_):
     eval_config.num_steps = 1
 
     with tf.Graph().as_default(), tf.Session(config=tf.ConfigProto(log_device_placement=True)) as session:
+
         tf.set_random_seed(1)
+
         initializer = tf.uniform_unit_scaling_initializer()
         with tf.variable_scope("model", reuse=None, initializer=initializer):
             m = PTBModel(is_training=True, config=config)

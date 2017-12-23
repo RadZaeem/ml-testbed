@@ -24,6 +24,7 @@ class BitGRUCell(tf.nn.rnn_cell.RNNCell):
 
     def __call__(self, inputs, state, scope=None):
         def replace_w(x):
+
             if x.op.name.endswith('kernel'):
                 print ("\nQuantizing:" + x.op.name)
                 return bit_utils.quantize_w(tf.tanh(x), bit=self._w_bit)
