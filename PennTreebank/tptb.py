@@ -68,9 +68,9 @@ class Config(object):
     learning_rate = 1e-3
     max_grad_norm = 5
     num_layers = 1
-    num_steps = 20
+    num_steps = 5#20
     hidden_size = 300
-    max_epoch = 100
+    max_epoch = 200
     keep_prob = 0.5
     batch_size = 20
     vocab_size = 10000
