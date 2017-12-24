@@ -70,7 +70,7 @@ class Config(object):
     num_layers = 1
     num_steps = 20
     hidden_size = 300
-    max_epoch = 300
+    max_epoch = 100
     keep_prob = 0.5
     batch_size = 20
     vocab_size = 10000
@@ -117,7 +117,7 @@ class Model(ModelDesc):
         def get_basic_cell():
             # cell = rnn.BasicLSTMCell(num_units=conf.hidden_size, forget_bias=0.0, reuse=tf.get_variable_scope().reuse)
             cell = ttq_rnn.TtqLSTMCell(num_units=conf.hidden_size,thre=0.05,#)
-                forget_bias=0.0, reuse=tf.get_variable_scope().reuse)
+                forget_bias=1.0, reuse=tf.get_variable_scope().reuse)
             if is_training and conf.keep_prob < 1:
                 cell = rnn.DropoutWrapper(cell, output_keep_prob=conf.keep_prob)
             return cell
@@ -270,9 +270,9 @@ def get_config():
         print("\n\nLR: "+repr(epoch)+" | "+repr(base_lr))
         # base_lr=conf.learning_rate1e-3
         # print(base_lr)
-        if epoch <= conf.nr_epoch_first_stage:
+        if epoch <= 70:#conf.nr_epoch_first_stage
             return base_lr * 0.99#0.98
-        elif epoch <= conf.nr_epoch_second_stage:
+        elif epoch <= 90:#conf.nr_epoch_second_stage
             return base_lr * 0.11
         else:
             return base_lr * 0.09

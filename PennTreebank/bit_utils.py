@@ -9,6 +9,7 @@ _object_stack = []
 
 
 def _new_get_variable(*args, **kwargs):
+    # kwargs['reuse']=True
     v = _origin_get_variable(*args, **kwargs)
     if len(_object_stack) != 0:
         return _object_stack[-1]._fn(v)
@@ -26,7 +27,9 @@ class TFVariableReplaceHelper(object):
         _object_stack.append(self)
         self._old_get_variable = tf.get_variable
         tf.get_variable = _new_get_variable
+        # variable_scope.reuse = True
         variable_scope.get_variable = _new_get_variable
+        # 
 
     def __exit__(self, *args):
         global _object_stack

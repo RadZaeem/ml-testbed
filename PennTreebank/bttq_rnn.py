@@ -26,7 +26,7 @@ from __future__ import print_function
 
 import tensorflow as tf
 import ternary
-from ternary import *
+from ternary import tw_ternarize
 import bit_utils
 
 import collections
@@ -442,9 +442,6 @@ class TtqLSTMCell(RNNCell):
           print ("\nBefore quantize name: " + x.op.name)
           return tw_ternarize(x, self._thre) # tanh to round to [-1,+1]
           #return bit_utils.quantize_w(tf.tanh(x), bit=self._w_bit)
-      elif x.op.name.endswith('bias'):
-          print ("\nBefore quantize name: " + x.op.name)
-          return tw_ternarize_bias(x, self._thre) 
       else:
           print ("\nNOT Quantizing:" + x.op.name)
           print(x.shape)
