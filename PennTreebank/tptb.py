@@ -63,14 +63,14 @@ def get_PennTreeBank(data_dir=None):
 #     f_bit = 2
 #     cell_type = 'lstm'
 class Config(object):
-    init_scale = 0.08
+    init_scale = 0.01
 
     learning_rate = 1e-3
     max_grad_norm = 5
     num_layers = 1
-    num_steps = 5#20
+    num_steps = 20
     hidden_size = 300
-    max_epoch = 200
+    max_epoch = 300
     keep_prob = 0.5
     batch_size = 20
     vocab_size = 10000
@@ -271,11 +271,11 @@ def get_config():
         # base_lr=conf.learning_rate1e-3
         # print(base_lr)
         if epoch <= conf.nr_epoch_first_stage:
-            return base_lr * 0.98
+            return base_lr * 0.99#0.98
         elif epoch <= conf.nr_epoch_second_stage:
-            return base_lr * 0.77
+            return base_lr * 0.11
         else:
-            return base_lr * 0.53
+            return base_lr * 0.09
 
     M = Model()
     from tensorflow.python import debug as tf_debug
