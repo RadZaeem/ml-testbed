@@ -62,21 +62,40 @@ def get_PennTreeBank(data_dir=None):
 #     w_bit = 2
 #     f_bit = 2
 #     cell_type = 'lstm'
+# class Config(object):
+#     learning_rate = 1e-3
+#     max_grad_norm = 10
+#     num_layers = 1
+#     num_steps = 20
+#     hidden_size = 300
+#     max_epoch = 100
+#     keep_prob = 0.5
+#     batch_size = 20
+#     vocab_size = 10000
+#     nr_epoch_first_stage = 40
+#     nr_epoch_second_stage = 80
+#     w_bit = 2
+#     f_bit = 2
+#     cell_type = 'lstm'
+
 class Config(object):
-    learning_rate = 1e-3
-    max_grad_norm = 10
-    num_layers = 1
-    num_steps = 20
-    hidden_size = 300
-    max_epoch = 100
-    keep_prob = 0.5
-    batch_size = 20
-    vocab_size = 10000
-    nr_epoch_first_stage = 40
-    nr_epoch_second_stage = 80
-    w_bit = 2
-    f_bit = 2
-    cell_type = 'lstm'
+  """Large config."""
+  init_scale = 0.04
+  learning_rate = 0.01#1.0
+  max_grad_norm = 10
+  num_layers = 2
+  num_steps = 35
+  hidden_size = 1500
+  max_epoch = 14
+  max_max_epoch = 55
+  nr_epoch_first_stage = 14
+  nr_epoch_second_stage = 55
+  keep_prob = 0.35
+  lr_decay = 1 / 1.15
+  batch_size = 20
+  vocab_size = 10000
+  cell_type = 'lstm'
+
 
 class Model(ModelDesc):
     def _get_inputs(self):
@@ -89,11 +108,13 @@ class Model(ModelDesc):
 
         is_training = get_current_tower_context().is_training
         input, nextinput = inputs
-        initializer = tf.uniform_unit_scaling_initializer()#tf.random_uniform_initializer()-0.05, 0.05)
+        # initializer = tf.uniform_unit_scaling_initializer()#tf.random_uniform_initializer()-0.05, 0.05)
+        # initializer = tf.random_uniform_initializer(-0.04, 0.04)
+        initializer = tf.random_uniform_initializer(-conf.init_scale,conf.init_scale)
 
         def get_basic_cell():
             # cell = rnn.BasicLSTMCell(num_units=conf.hidden_size, forget_bias=0.0, reuse=tf.get_variable_scope().reuse)
-            cell = ttq_rnn.TtqLSTMCell(num_units=conf.hidden_size,thre=0.01,#)
+            cell = ttq_rnn.TtqLSTMCell(num_units=conf.hidden_size,thre=0.05,#)
                 forget_bias=0.0, reuse=tf.get_variable_scope().reuse)
             if is_training and conf.keep_prob < 1:
                 cell = rnn.DropoutWrapper(cell, output_keep_prob=conf.keep_prob)
@@ -119,11 +140,14 @@ class Model(ModelDesc):
              rnn.LSTMStateTuple(get_v('c1'), get_v('h1')))
         # self.reset_lstm_state()
         embeddingW = tf.get_variable('embedding', [conf.vocab_size, conf.hidden_size], 
-            initializer=tf.random_uniform_initializer())
+            initializer=initializer)#tf.random_uniform_initializer())
         input_feature = tf.nn.embedding_lookup(embeddingW, input)  # B x seqlen x hiddensize
 
         # print("\n-> Input Rounding")
         # input_feature = bit_utils.round_bit(tf.nn.relu(input_feature), bit=conf.f_bit)
+        
+        # relu to Round to [0,1] (He, 2016)
+        input_feature = tf.nn.relu(input_feature)
         
         if is_training and conf.keep_prob < 1:
             input_feature = Dropout(input_feature, conf.keep_prob)
@@ -224,18 +248,32 @@ def get_config():
 
     # tf.summary.scalar('learning_rate', lr)
 
-    #global conf
+    # #global conf
+    # def get_learning_rate(epoch, base_lr):
+    #     #base_lr = conf.learning_rate
+    #     conf = Config()
+    #     print("\n\nLR: "+repr(epoch)+" | "+repr(base_lr))
+    #     # base_lr=conf.learning_rate1e-3
+    #     # print(base_lr)
+    #     if epoch <= conf.nr_epoch_first_stage:
+    #         return base_lr
+    #     elif epoch <= conf.nr_epoch_second_stage:
+    #         return base_lr * 0.1
+    #     else:
+    #         return base_lr * 0.01
+
     def get_learning_rate(epoch, base_lr):
         #base_lr = conf.learning_rate
-        print("\n\nBASE at epoch "+repr(epoch))
+        conf = Config()
+        print("\n\nLR: "+repr(epoch)+" | "+repr(base_lr))
         # base_lr=conf.learning_rate1e-3
-        print(base_lr)
-        if epoch <= 30:# conf.nr_epoch_first_stage:
+        # print(base_lr)
+        if epoch <= conf.max_max_epoch:
             return base_lr
-        elif epoch <= 70:#conf.nr_epoch_second_stage:
-            return base_lr * 0.5#0.1
+        elif epoch <= conf.max_max_epoch:
+            return base_lr * conf.lr_decay
         else:
-            return base_lr * 0.1#0.01
+            return base_lr * conf.lr_decay*0.1
 
     M = Model()
     from tensorflow.python import debug as tf_debug
@@ -246,11 +284,10 @@ def get_config():
             # HookToCallback(tf_debug.LocalCLIDebugHook()),
             ModelSaver(),
             # ScheduledHyperParamSetter('learning_rate',
-                                      # [(1, 0.1), (82, 0.01), (123, 0.001), (150, 0.0001)]),
-            HyperParamSetterWithFunc(
-                'learning_rate', #lambda e, x:  1e-3),
+            #                           [(1, 0.001), (25, 0.001), (35, 0.0005), (55, 0.0001)]),
+            HyperParamSetterWithFunc('learning_rate',
                 get_learning_rate),
-            #     lambda e, x: x * 0.80 if e > 6 else x),
+                # lambda e, x: x * 0.80 if e > 6 else x),
             RunOp(lambda: M.reset_lstm_state()),
             InferenceRunner(val_data, [ScalarStats(['cost'])]),
             RunOp(lambda: M.reset_lstm_state()),
@@ -268,7 +305,7 @@ def get_config():
                      np.exp(self.trainer.monitors.get_latest('test_cost') / conf.num_steps))]
             ),
         ],
-        max_epoch=200#conf.max_epoch,
+        max_epoch=conf.max_max_epoch,
     )
 
 
@@ -286,8 +323,8 @@ if __name__ == '__main__':
         config.session_init = SaverRestore(args.load)
     
 
-    # launch_train_with_config(config, SimpleTrainer())
-    SyncMultiGPUTrainer(config).train()
+    launch_train_with_config(config, SimpleTrainer())
+    # SyncMultiGPUTrainer(config).train()
 
 
 '''

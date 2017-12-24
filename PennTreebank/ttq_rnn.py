@@ -440,11 +440,17 @@ class TtqLSTMCell(RNNCell):
       # if x.op.name.endswith('Matrix'):
       if x.op.name.endswith('kernel'):
           print ("\nBefore quantize name: " + x.op.name)
-          return tw_ternarize(x, self._thre)
+          return tw_ternarize(tf.tanh(x), self._thre) # tanh to round to [-1,+1]
           #return bit_utils.quantize_w(tf.tanh(x), bit=self._w_bit)
       else:
           print ("\nNOT Quantizing:" + x.op.name)
+          print(x.shape)
+          # print(dir(x))
+          print(type(x))
+          #print Wp and Wn value
+          # if not x.op.name.endswith("bias"): x = tf.Print(x,[x.op.name,x])
           tf.summary.histogram(x.name, x)
+
           return x
     sigmoid = math_ops.sigmoid
     # Parameters of gates are concatenated into one multiply for efficiency.
