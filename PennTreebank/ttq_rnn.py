@@ -379,7 +379,7 @@ class TtqLSTMCell(RNNCell):
   """
 
   def __init__(self, num_units, thre=0.05, forget_bias=1.0,
-               state_is_tuple=True, activation=tf.sigmoid, reuse=True): #None
+               state_is_tuple=True, activation=math_ops.tanh, reuse=True): #None
     """Initialize the basic LSTM cell.
 
     Args:
@@ -440,7 +440,7 @@ class TtqLSTMCell(RNNCell):
       # if x.op.name.endswith('Matrix'):
       if x.op.name.endswith('kernel'):
           print ("\nBefore quantize name: " + x.op.name)
-          return tw_ternarize(tf.tanh(x), self._thre) # tanh to round to [-1,+1]
+          return tw_ternarize(x, self._thre) # tanh to round to [-1,+1]
           #return bit_utils.quantize_w(tf.tanh(x), bit=self._w_bit)
       else:
           print ("\nNOT Quantizing:" + x.op.name)

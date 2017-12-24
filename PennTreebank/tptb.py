@@ -62,39 +62,41 @@ def get_PennTreeBank(data_dir=None):
 #     w_bit = 2
 #     f_bit = 2
 #     cell_type = 'lstm'
-# class Config(object):
-#     learning_rate = 1e-3
-#     max_grad_norm = 10
-#     num_layers = 1
-#     num_steps = 20
-#     hidden_size = 300
-#     max_epoch = 100
-#     keep_prob = 0.5
-#     batch_size = 20
-#     vocab_size = 10000
-#     nr_epoch_first_stage = 40
-#     nr_epoch_second_stage = 80
-#     w_bit = 2
-#     f_bit = 2
-#     cell_type = 'lstm'
-
 class Config(object):
-  """Large config."""
-  init_scale = 0.04
-  learning_rate = 0.01#1.0
-  max_grad_norm = 10
-  num_layers = 2
-  num_steps = 35
-  hidden_size = 1500
-  max_epoch = 14
-  max_max_epoch = 55
-  nr_epoch_first_stage = 14
-  nr_epoch_second_stage = 55
-  keep_prob = 0.35
-  lr_decay = 1 / 1.15
-  batch_size = 20
-  vocab_size = 10000
-  cell_type = 'lstm'
+    init_scale = 0.08
+
+    learning_rate = 1e-3
+    max_grad_norm = 5
+    num_layers = 1
+    num_steps = 20
+    hidden_size = 300
+    max_epoch = 100
+    keep_prob = 0.5
+    batch_size = 20
+    vocab_size = 10000
+    nr_epoch_first_stage = 40
+    nr_epoch_second_stage = 80
+    w_bit = 2
+    f_bit = 2
+    cell_type = 'lstm'
+
+# class Config(object):
+#   """Large config."""
+#   init_scale = 0.04
+#   learning_rate = 0.01#1.0
+#   max_grad_norm = 10
+#   num_layers = 2
+#   num_steps = 35
+#   hidden_size = 1500
+#   max_epoch = 14
+#   max_max_epoch = 55
+#   nr_epoch_first_stage = 14
+#   nr_epoch_second_stage = 55
+#   keep_prob = 0.35
+#   lr_decay = 1 / 1.15
+#   batch_size = 20
+#   vocab_size = 10000
+#   cell_type = 'lstm'
 
 
 class Model(ModelDesc):
@@ -147,7 +149,7 @@ class Model(ModelDesc):
         # input_feature = bit_utils.round_bit(tf.nn.relu(input_feature), bit=conf.f_bit)
         
         # relu to Round to [0,1] (He, 2016)
-        input_feature = tf.nn.relu(input_feature)
+        # input_feature = tf.nn.relu(input_feature)
         
         if is_training and conf.keep_prob < 1:
             input_feature = Dropout(input_feature, conf.keep_prob)
@@ -268,12 +270,12 @@ def get_config():
         print("\n\nLR: "+repr(epoch)+" | "+repr(base_lr))
         # base_lr=conf.learning_rate1e-3
         # print(base_lr)
-        if epoch <= conf.max_max_epoch:
-            return base_lr
-        elif epoch <= conf.max_max_epoch:
-            return base_lr * conf.lr_decay
+        if epoch <= conf.nr_epoch_first_stage:
+            return base_lr * 0.98
+        elif epoch <= conf.nr_epoch_second_stage:
+            return base_lr * 0.77
         else:
-            return base_lr * conf.lr_decay*0.1
+            return base_lr * 0.53
 
     M = Model()
     from tensorflow.python import debug as tf_debug
@@ -305,7 +307,7 @@ def get_config():
                      np.exp(self.trainer.monitors.get_latest('test_cost') / conf.num_steps))]
             ),
         ],
-        max_epoch=conf.max_max_epoch,
+        max_epoch=conf.max_epoch,
     )
 
 
