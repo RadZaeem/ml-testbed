@@ -341,6 +341,93 @@ class GRUCell(RNNCell):
     return new_h, new_h
 
 
+class TtqGRUCell(RNNCell):
+  """Gated Recurrent Unit cell (cf. http://arxiv.org/abs/1406.1078).
+
+  Args:
+    num_units: int, The number of units in the GRU cell.
+    activation: Nonlinearity to use.  Default: `tanh`.
+    reuse: (optional) Python boolean describing whether to reuse variables
+     in an existing scope.  If not `True`, and the existing scope already has
+     the given variables, an error is raised.
+    kernel_initializer: (optional) The initializer to use for the weight and
+    projection matrices.
+    bias_initializer: (optional) The initializer to use for the bias.
+  """
+  def __init__(self,
+               num_units,
+               thre=0.05,
+               activation=None,
+               reuse=None,
+               kernel_initializer=None,
+               bias_initializer=None):
+    super(TtqGRUCell, self).__init__(_reuse=reuse)
+    self._num_units = num_units
+    self._activation = activation or math_ops.tanh
+    self._kernel_initializer = kernel_initializer
+    self._bias_initializer = bias_initializer
+    self._gate_linear = None
+    self._candidate_linear = None
+    self._thre = thre
+
+  @property
+  def state_size(self):
+    return self._num_units
+
+  @property
+  def output_size(self):
+    return self._num_units
+
+  def call(self, inputs, state):
+    def replace_w(x):
+      # if x.op.name.endswith('Matrix'):
+      if x.op.name.endswith('kernel'):
+        print ("\nBefore quantize name: " + x.op.name)
+        return tw_ternarize(x, self._thre) # tanh to round to [-1,+1]
+        #return bit_utils.quantize_w(tf.tanh(x), bit=self._w_bit)
+      elif x.op.name.endswith('bias'):
+        print ("\nBefore quantize name: " + x.op.name)
+        return tw_ternarize_bias(x, self._thre) 
+      else:
+        print ("\nNOT Quantizing:" + x.op.name)
+        print(x.shape)
+        # print(dir(x))
+        print(type(x))
+        #print Wp and Wn value
+        # if not x.op.name.endswith("bias"): x = tf.Print(x,[x.op.name,x])
+        tf.summary.histogram(x.name, x)
+        return x
+    # Parameters of gates are concatenated into one multiply for efficiency.
+    with bit_utils.replace_variable(replace_w):
+      """Gated recurrent unit (GRU) with nunits cells."""
+      if self._gate_linear is None:
+        bias_ones = self._bias_initializer
+        if self._bias_initializer is None:
+          bias_ones = init_ops.constant_initializer(1.0, dtype=inputs.dtype)
+        with vs.variable_scope("gates"):  # Reset gate and update gate.
+          self._gate_linear = _Linear(
+              [inputs, state],
+              2 * self._num_units,
+              True,
+              bias_initializer=bias_ones,
+              kernel_initializer=self._kernel_initializer)
+
+      value = math_ops.sigmoid(self._gate_linear([inputs, state]))
+      r, u = array_ops.split(value=value, num_or_size_splits=2, axis=1)
+
+      r_state = r * state
+      if self._candidate_linear is None:
+        with vs.variable_scope("candidate"):
+          self._candidate_linear = _Linear(
+              [inputs, r_state],
+              self._num_units,
+              True,
+              bias_initializer=self._bias_initializer,
+              kernel_initializer=self._kernel_initializer)
+      c = self._activation(self._candidate_linear([inputs, r_state]))
+      new_h = u * state + (1 - u) * c
+    return new_h, new_h
+
 _LSTMStateTuple = collections.namedtuple("LSTMStateTuple", ("c", "h"))
 
 
@@ -421,7 +508,7 @@ class TtqLSTMCell(RNNCell):
   def output_size(self):
     return self._num_units
 
-  def __call__(self, inputs, state, scope=None):
+  def call(self, inputs, state, scope=None):
     """Long short-term memory cell (LSTM).
 
     Args:
@@ -437,58 +524,40 @@ class TtqLSTMCell(RNNCell):
         `state_is_tuple`).
     """
     def replace_w(x):
-      # if x.op.name.endswith('Matrix'):
       if x.op.name.endswith('kernel'):
           print ("\nBefore quantize name: " + x.op.name)
-          return tw_ternarize(x, self._thre) # tanh to round to [-1,+1]
-          #return bit_utils.quantize_w(tf.tanh(x), bit=self._w_bit)
+          return tw_ternarize(x, self._thre) 
       elif x.op.name.endswith('bias'):
           print ("\nBefore quantize name: " + x.op.name)
           return tw_ternarize_bias(x, self._thre) 
       else:
           print ("\nNOT Quantizing:" + x.op.name)
           print(x.shape)
-          # print(dir(x))
-          print(type(x))
-          #print Wp and Wn value
-          # if not x.op.name.endswith("bias"): x = tf.Print(x,[x.op.name,x])
           tf.summary.histogram(x.name, x)
 
           return x
     sigmoid = math_ops.sigmoid
     # Parameters of gates are concatenated into one multiply for efficiency.
     with bit_utils.replace_variable(replace_w):
-      with tf.variable_scope(scope or type(self).__name__):
-        if self._state_is_tuple:
-          c, h = state
-          # print("inside state is")
-          # print()
-        else:
-          c, h = array_ops.split(value=state, num_or_size_splits=2, axis=1)
+      if self._state_is_tuple:
+        c, h = state
+      else:
+        c, h = array_ops.split(value=state, num_or_size_splits=2, axis=1)
     
 
-        if self._linear is None:
-          self._linear = _Linear([inputs, h], 4 * self._num_units, True)
-        # i = input_gate, j = new_input, f = forget_gate, o = output_gate
-        i, j, f, o = array_ops.split(
-            value=self._linear([inputs, h]), num_or_size_splits=4, axis=1)
-    
-        # new_c = (
-        #     c * sigmoid(f + self._forget_bias) + sigmoid(i) * self._activation(j))
-        # new_h = self._activation(new_c) * sigmoid(o)
-        new_c = (
-            c * sigmoid(f + self._forget_bias) + sigmoid(i) * self._activation(j))
+      if self._linear is None:
+        self._linear = _Linear([inputs, h], 4 * self._num_units, True)
+      # i = input_gate, j = new_input, f = forget_gate, o = output_gate
+      i, j, f, o = array_ops.split(
+          value=self._linear([inputs, h]), num_or_size_splits=4, axis=1)
+      new_c = (
+          c * sigmoid(f + self._forget_bias) + sigmoid(i) * self._activation(j))
+      new_h = self._activation(new_c) * sigmoid(o)
 
-        # print("\nRounding new_h")
-        # new_h = bit_utils.round_bit(
-        #   self._activation(new_c) * sigmoid(o), bit=2)
-
-        new_h = self._activation(new_c) * sigmoid(o)
-
-        if self._state_is_tuple:
-          new_state = LSTMStateTuple(new_c, new_h)
-        else:
-          new_state = array_ops.concat([new_c, new_h], 1)
+      if self._state_is_tuple:
+        new_state = LSTMStateTuple(new_c, new_h)
+      else:
+        new_state = array_ops.concat([new_c, new_h], 1)
     return new_h, new_state
 
 

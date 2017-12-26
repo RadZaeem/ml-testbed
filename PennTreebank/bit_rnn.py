@@ -360,6 +360,16 @@ class LSTMStateTuple(_LSTMStateTuple):
                       (str(c.dtype), str(h.dtype)))
     return c.dtype
 
+def hard_sigmoid(x):
+  return tf.clip_by_value((x+1.)/2.,0,1)
+
+# The neurons' activations binarization function
+# It behaves like the sign function during forward propagation
+# And like:
+#   hard_tanh(x) = 2*hard_sigmoid(x)-1 
+# during back propagation
+def binary_tanh_unit(x):
+  return 2.*hard_sigmoid(x)-1.
 
 class BitLSTMCell(RNNCell):
   """Basic LSTM recurrent network cell.
@@ -438,8 +448,13 @@ class BitLSTMCell(RNNCell):
     def replace_w(x):
       # if x.op.name.endswith('Matrix'):
       if x.op.name.endswith('kernel'):
-          print ("\nBefore quantize name: " + x.op.name)
+          print ("\nKERNEL Before quantize name: " + x.op.name)
           return bit_utils.quantize_w(tf.tanh(x), bit=self._w_bit)
+      elif x.op.name.endswith('bias'):
+          print ("\nbias Before round name: " + x.op.name)
+          return bit_utils.quantize_w(x, bit=self._w_bit)
+          # tf.summary.histogram(x.name, x)
+          # return bit_utils.round_bit(x, bit=self._w_bit)
       else:
           print ("\nNOT Quantizing:" + x.op.name)
           tf.summary.histogram(x.name, x)
@@ -450,25 +465,20 @@ class BitLSTMCell(RNNCell):
       with tf.variable_scope(scope or type(self).__name__):
         if self._state_is_tuple:
           c, h = state
-          # print("inside state is")
-          # print()
         else:
           c, h = array_ops.split(value=state, num_or_size_splits=2, axis=1)
     
 
         if self._linear is None:
           self._linear = _Linear([inputs, h], 4 * self._num_units, True)
-        # i = input_gate, j = new_input, f = forget_gate, o = output_gate
+        # i = input_gate, j = new_input = g, f = forget_gate, o = output_gate
         i, j, f, o = array_ops.split(
             value=self._linear([inputs, h]), num_or_size_splits=4, axis=1)
     
-        # new_c = (
-        #     c * sigmoid(f + self._forget_bias) + sigmoid(i) * self._activation(j))
-        # new_h = self._activation(new_c) * sigmoid(o)
         new_c = (
             c * sigmoid(f + self._forget_bias) + sigmoid(i) * self._activation(j))
 
-        print("\nRounding new_h")
+        # print("\nRounding new_h")
         new_h = bit_utils.round_bit(
           self._activation(new_c) * sigmoid(o), bit=self._f_bit)
 

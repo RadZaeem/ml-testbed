@@ -43,8 +43,7 @@ def replace_variable(fn):
 
 
 def round_bit(x, bit):
-    print("Rounding:")
-    print(x)
+    print("Rounding:", repr(x))
     if bit == 32:
         return x
     g = tf.get_default_graph()

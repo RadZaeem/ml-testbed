@@ -29,6 +29,7 @@ G = tf.get_default_graph()
 
 def tw_ternarize(x, thre):
 
+    print("before ternarized name:", repr(x))
     shape = x.get_shape()
     print("\nShape of")
     print(shape)
@@ -64,6 +65,7 @@ def tw_ternarize(x, thre):
 
 def tw_ternarize_bias(x, thre):
 
+    print("bias name:",repr(x))
     shape = x.get_shape()
     print("\nShape of")
     print(shape)
@@ -90,6 +92,39 @@ def tw_ternarize_bias(x, thre):
 
     print("Ternarized name: ", repr(w))
     tf.summary.histogram(w.name, w)
+
+    # tf.summary(w.name, w)
+
+    return w
+
+def tw_ternarize_input(x, thre):
+    print("input name:", repr(x))
+    shape = x.get_shape()
+    print("\nShape of")
+    print(shape)
+
+    thre_x = tf.stop_gradient(tf.reduce_max(tf.abs(x)) * thre)
+
+    w_p = tf.get_variable('Ip',  collections=[tf.GraphKeys.GLOBAL_VARIABLES, 'positives'], initializer=1.0)
+    w_n = tf.get_variable('In',  collections=[tf.GraphKeys.GLOBAL_VARIABLES, 'negatives'], initializer=1.0)
+
+
+    tf.summary.scalar(w_p.name, w_p)
+    tf.summary.scalar(w_n.name, w_n)
+
+    mask = tf.ones(shape)
+    mask_p = tf.where(x > thre_x, tf.ones(shape) * w_p, mask)
+    mask_np = tf.where(x < -thre_x, tf.ones(shape) * w_n, mask_p)
+    mask_z = tf.where((x < thre_x) & (x > - thre_x), tf.zeros(shape), mask)
+
+    with G.gradient_override_map({"Sign": "Identity", "Mul": "Add"}):
+        w =  tf.sign(x) * tf.stop_gradient(mask_z)
+
+    w = w * mask_np
+
+
+    print("Ternarized name: ", repr(w))
+    tf.summary.histogram(x.op.name, w)
 
     # tf.summary(w.name, w)
 
