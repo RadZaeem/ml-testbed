@@ -51,6 +51,18 @@ def round_bit(x, bit):
     with g.gradient_override_map({'Round': 'Identity'}):
         return tf.round(x * k) / k
 
+def round_bit_whist(x, bit):
+    print("Rounding:", repr(x))
+    if bit == 32:
+        return x
+    g = tf.get_default_graph()
+    k = 2**bit - 1
+    with g.gradient_override_map({'Round': 'Identity'}):
+        a = tf.round(x * k) / k
+        tf.summary.histogram(a.name, a)
+
+        return a
+
 
 _grad_defined = False
 if not _grad_defined:

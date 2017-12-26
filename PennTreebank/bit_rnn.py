@@ -452,9 +452,10 @@ class BitLSTMCell(RNNCell):
           return bit_utils.quantize_w(tf.tanh(x), bit=self._w_bit)
       elif x.op.name.endswith('bias'):
           print ("\nbias Before round name: " + x.op.name)
-          return bit_utils.quantize_w(x, bit=self._w_bit)
+          # return bit_utils.quantize_w(x, bit=self._w_bit)
           # tf.summary.histogram(x.name, x)
-          # return bit_utils.round_bit(x, bit=self._w_bit)
+          return x
+          return bit_utils.round_bit_whist(x, bit=self._w_bit)
       else:
           print ("\nNOT Quantizing:" + x.op.name)
           tf.summary.histogram(x.name, x)
@@ -462,7 +463,7 @@ class BitLSTMCell(RNNCell):
     sigmoid = math_ops.sigmoid
     # Parameters of gates are concatenated into one multiply for efficiency.
     with bit_utils.replace_variable(replace_w):
-      with tf.variable_scope(scope or type(self).__name__):
+      # with tf.variable_scope(scope or type(self).__name__):
         if self._state_is_tuple:
           c, h = state
         else:

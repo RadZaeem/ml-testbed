@@ -138,23 +138,24 @@ class Model(ModelDesc):
                 tf.assign(state_var[k].h, last_state[k].h)])
 
         def replace_w(x):
-          # if x.op.name.endswith('Matrix'):
-          if x.op.name.endswith('kernel'):
-              print ("\nKERNEL Before quantize name: " + x.op.name)
-              return bit_utils.quantize_w(tf.tanh(x), bit=self._w_bit)
-          elif x.op.name.endswith('bias'):
-              print ("\nbias Before round name: " + x.op.name)
-              tf.summary.histogram(x.name, x)
-              return bit_utils.round_bit(x, bit=self._w_bit)
-          else:
-              print ("\nNOT Quantizing:" + x.op.name)
-              tf.summary.histogram(x.name, x)
-              return x
+            # if x.op.name.endswith('Matrix'):
+            if x.op.name.endswith('W'):
+                print ("\nKERNEL Before quantize name: " + x.op.name)
+                return bit_utils.quantize_w(tf.tanh(x), bit=conf.w_bit)
+            elif x.op.name.endswith('b'):
+                print ("\nbias Before round name: " + x.op.name)
+                # tf.summary.histogram(x.name, x)
+                return x
+                return bit_utils.round_bit_whist(x, bit=conf.w_bit)
+            else:
+                print ("\nNOT Quantizing:" + x.op.name)
+                tf.summary.histogram(x.name, x)
+                return x
 
         # seqlen x (Bxrnnsize)
         output = tf.reshape(tf.concat(outputs, 1), [-1, conf.hidden_size])  # (Bxseqlen) x hidden
-        with bit_utils.replace_variable(
-                lambda x: bit_utils.quantize_w(tf.tanh(x), bit=conf.w_bit)):
+        with bit_utils.replace_variable(replace_w):
+                # lambda x: bit_utils.quantize_w(tf.tanh(x), bit=conf.w_bit)):
             logits = FullyConnected('fc', output, conf.vocab_size, nl=tf.identity, W_init=initializer, b_init=initializer)
         # logits = FullyConnected('fc', output, conf.vocab_size, nl=tf.identity, W_init=initializer, b_init=initializer)
         xent_loss = tf.nn.sparse_softmax_cross_entropy_with_logits(
@@ -256,7 +257,7 @@ def get_config():
 
 
 if __name__ == '__main__':
-    tf.set_random_seed(1234)
+    tf.set_random_seed(1)
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpu', help='comma separated list of GPU(s) to use.')
     parser.add_argument('--load', help='load model')
